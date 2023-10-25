@@ -13,7 +13,7 @@ export default function Register() {
         <div className="flex flex-col align-center">
           <div className="flex flex-col">
             <h1 className="font-bold text-[#09090B] text-4xl">
-              Create your account
+              Create your account d
             </h1>
             <p className="text-[#71717A] font-normal">Unlock all Features</p>
           </div>
