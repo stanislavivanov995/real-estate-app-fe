@@ -2,12 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/* @layer base {
   * {
     @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
+  }
+} */
+
+@layer inputs {
+  .input-field {
+    @apply w-[453px] h-16 bg-indigo-400 bg-opacity-10 rounded-[10px] border-2 border-indigo-400 flex justify-start text-lg items-center pl-2 gap-2.5
   }
 }
 

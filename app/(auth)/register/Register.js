@@ -85,7 +85,7 @@ export default function Register() {
         </div>
         <div className="flex flex-col justify-center align-center bg-[#343859]">
           <div className="">
-            <img src="public\register.png" alt="Tech image" />
+            <img src="/public/register.png" alt="Tech image" />
           </div>
         </div>
       </div>
