@@ -1,4 +1,8 @@
+"use client";
 import PublicLayout from "@/components/layouts/PublicLayout";
+import Image from "next/image";
+import Link from "next/link";
+import { Formik, Field, Form, ErrorMessage } from "formik";
 
 export default function Register() {
   // TODO: Register form must have the following inputs + validations:
@@ -9,86 +13,128 @@ export default function Register() {
   //  5. Checkbox for accepting terms
   return (
     <PublicLayout>
-      <div className="smaller-screen flex justify-evenly">
-        <div className="flex flex-col align-center">
-          <div className="flex flex-col">
-            <h1 className="font-bold text-[#09090B] text-4xl">
-              Create your account
-            </h1>
-            <p className="text-[#71717A] font-normal">Unlock all Features</p>
-          </div>
+      <Formik>
+        <div className="flex justify-between pl-[10em] max-2xl:pl-[2em]">
+          <div className="flex flex-col justify-center gap-16 pr-[5em] max-2xl:pr-[2em]">
+            <div className="flex flex-col">
+              <h1 className="font-bold text-[#09090B] text-4xl">
+                Create your account
+              </h1>
+              <p className="text-[#71717A] font-normal">Unlock all Features</p>
+            </div>
+            <Form className="flex flex-col gap-4 text-center">
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+                <span>
+                  <Image width={30} height={30} src="/person.png"></Image>
+                </span>
+                <Field
+                  className="indent-2 outline-0 bg-transparent"
+                  type="text"
+                  name="first-name"
+                  id="first-name"
+                  placeholder="First Name"
+                />
+              </div>
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+                <span>
+                  <Image width={30} height={30} src="/person.png"></Image>
+                </span>
+                <Field
+                  className="indent-2 outline-0 bg-transparent"
+                  type="text"
+                  name="last-name"
+                  id="last-name"
+                  placeholder="Last Name"
+                />
+              </div>
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+                <span>
+                  <Image width={30} height={30} src="/envelope.png"></Image>
+                </span>
+                <Field
+                  className="indent-2 outline-0 bg-transparent"
+                  type="text"
+                  name="email"
+                  id="email"
+                  placeholder="Email"
+                />
+              </div>
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+                <span>
+                  <Image width={30} height={30} src="/call.png"></Image>
+                </span>
+                <Field
+                  className="indent-2 outline-0 bg-transparent"
+                  type="text"
+                  name="phone"
+                  id="phone"
+                  placeholder="Phone ( Optional )"
+                />
+              </div>
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+                <span>
+                  <Image width={30} height={30} src="/shield-slash.png"></Image>
+                </span>
+                <Field
+                  className="indent-2 outline-0 bg-transparent"
+                  type="text"
+                  name="password"
+                  id="password"
+                  placeholder="Password"
+                />
+              </div>
+              <div className="flex gap-2  border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+                <span>
+                  <Image width={30} height={30} src="/shield-slash.png"></Image>
+                </span>
+                <Field
+                  className="indent-2 outline-0 bg-transparent"
+                  type="text"
+                  name="confirm-password"
+                  id="confirm-password"
+                  placeholder="Confirm Password"
+                />
+              </div>
 
-          <form className="flex flex-col gap-4">
-            <div className="flex gap-2 border-2 border-[#8098F980] p-2 rounded-lg">
-              <span>
-                <i className="fa-solid fa-user text-2xl text-[#8098F9]"></i>
-              </span>
-              <input
-                className="indent-2 outline-0"
-                type="text"
-                placeholder="First Name"
-              />
+              <div className="flex align-ceter gap-3 mt-2">
+                <Field type="checkbox" name="toggler" />
+                <label className="text-zinc-500 font-normal">
+                  Accept
+                  <span className="text-[#8098F9]"> terms and conditions</span>
+                </label>
+              </div>
+              <button className="w-[400px] h-16 bg-blue-600 rounded-[10px] text-white text-xl font-bold mt-2">
+                Register
+              </button>
+              <p>
+                You have account?
+                <Link
+                  href="/login"
+                  className="text-[#2D57FF] font-bold cursor-pointer"
+                >
+                  {" "}
+                  Login now
+                </Link>
+              </p>
+            </Form>
+          </div>
+          <div className="flex flex-col w-[1000px] h-[824px] justify-center items-center bg-[#343859] gap-2">
+            <Image
+              className="ml-5 max-xl:w-[350px]"
+              src="/register.png"
+              alt="register"
+              width={590}
+              height={220}
+            />
+            <div className="text-center px-3">
+              <h3 className="text-[#E0EAFF] font-bold text-2xl">Join us!</h3>
+              <p className="text-[#E0EAFF] opacity-60 font-medium text-1xl">
+                Just go through the boring process of creating an account.
+              </p>
             </div>
-            <div className="flex gap-2 border-2 border-[#8098F980] p-2 rounded-lg">
-              <span>
-                <i className="fa-solid fa-user text-2xl text-[#8098F9]"></i>
-              </span>
-              <input
-                className="indent-2 outline-0"
-                type="text"
-                placeholder="Last Name"
-              />
-            </div>
-            <div className="flex gap-2 border-2 border-[#8098F980] p-2 rounded-lg">
-              <span>
-                <i class="fa-solid fa-envelope text-2xl text-[#8098F9]"></i>
-              </span>
-              <input
-                className="indent-1.5 outline-0"
-                type="text"
-                placeholder="Email"
-              />
-            </div>
-            <div className="flex gap-2 border-2 border-[#8098F980] p-2 rounded-lg">
-              <span>
-                <i class="fa-solid fa-phone text-2xl text-[#8098F9]"></i>
-              </span>
-              <input
-                className="indent-2 outline-0"
-                type="text"
-                placeholder="Phone ( Optional )"
-              />
-            </div>
-            <div className="flex gap-2 border-2 border-[#8098F980] p-2 rounded-lg">
-              <span>
-                <i class="fa-solid fa-shield text-2xl text-[#8098F9]"></i>
-              </span>
-              <input
-                className="indent-2 outline-0"
-                type="text"
-                placeholder="Password"
-              />
-            </div>
-            <div className="flex gap-2 border-2 border-[#8098F980] p-2 rounded-lg">
-              <span>
-                <i class="fa-solid fa-shield text-2xl text-[#8098F9]"></i>
-              </span>
-              <input
-                className="indent-2 outline-0"
-                type="text"
-                placeholder="Confirm Password"
-              />
-            </div>
-
-            <button>Post Residence</button>
-          </form>
-        </div>
-        <div className="flex flex-col justify-center align-center bg-[#343859]">
-          <div className="">
-            <img src="public\register.png" alt="Tech image" />
           </div>
         </div>
-      </div>
+      </Formik>
     </PublicLayout>
   );
 }
