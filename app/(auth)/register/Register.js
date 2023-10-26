@@ -18,7 +18,7 @@ export default function Register() {
           <div className="flex flex-col justify-center items-center w-6/12 gap-16 max-2xl:pr-[2em] max-md:w-full mt-8">
             <div className="flex flex-col">
               <h1 className="font-bold text-[#09090B] text-3xl">
-                Create your account d
+                Create your account
               </h1>
               <p className="text-[#71717A] font-normal">Unlock all Features</p>
             </div>
