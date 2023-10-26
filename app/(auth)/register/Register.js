@@ -14,16 +14,16 @@ export default function Register() {
   return (
     <PublicLayout>
       <Formik>
-        <div className="flex justify-between pl-[10em] max-2xl:pl-[2em]">
-          <div className="flex flex-col justify-center gap-16 pr-[5em] max-2xl:pr-[2em]">
+        <div className="flex justify-between max-2xl:pl-[2em]">
+          <div className="flex flex-col justify-center items-center w-6/12 gap-16 max-2xl:pr-[2em] max-md:w-full mt-8">
             <div className="flex flex-col">
-              <h1 className="font-bold text-[#09090B] text-4xl">
+              <h1 className="font-bold text-[#09090B] text-3xl">
                 Create your account
               </h1>
               <p className="text-[#71717A] font-normal">Unlock all Features</p>
             </div>
-            <Form className="flex flex-col gap-4 text-center">
-              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+            <Form className="flex flex-col gap-4 items-center">
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
                 <span>
                   <Image width={30} height={30} src="/person.png"></Image>
                 </span>
@@ -35,7 +35,7 @@ export default function Register() {
                   placeholder="First Name"
                 />
               </div>
-              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
                 <span>
                   <Image width={30} height={30} src="/person.png"></Image>
                 </span>
@@ -47,7 +47,7 @@ export default function Register() {
                   placeholder="Last Name"
                 />
               </div>
-              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
                 <span>
                   <Image width={30} height={30} src="/envelope.png"></Image>
                 </span>
@@ -59,7 +59,7 @@ export default function Register() {
                   placeholder="Email"
                 />
               </div>
-              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
                 <span>
                   <Image width={30} height={30} src="/call.png"></Image>
                 </span>
@@ -71,7 +71,7 @@ export default function Register() {
                   placeholder="Phone ( Optional )"
                 />
               </div>
-              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+              <div className="flex gap-2 border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
                 <span>
                   <Image width={30} height={30} src="/shield-slash.png"></Image>
                 </span>
@@ -83,7 +83,7 @@ export default function Register() {
                   placeholder="Password"
                 />
               </div>
-              <div className="flex gap-2  border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[400px]">
+              <div className="flex gap-2  border-2 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
                 <span>
                   <Image width={30} height={30} src="/shield-slash.png"></Image>
                 </span>
@@ -96,14 +96,14 @@ export default function Register() {
                 />
               </div>
 
-              <div className="flex align-ceter gap-3 mt-2">
+              <div className="flex gap-3 mt-2 mr-12">
                 <Field type="checkbox" name="toggler" />
                 <label className="text-zinc-500 font-normal">
                   Accept
                   <span className="text-[#8098F9]"> terms and conditions</span>
                 </label>
               </div>
-              <button className="w-[400px] h-16 bg-blue-600 rounded-[10px] text-white text-xl font-bold mt-2">
+              <button className="w-[300px] h-16 bg-blue-600 rounded-[10px] text-white text-xl font-bold mt-2">
                 Register
               </button>
               <p>
@@ -118,9 +118,9 @@ export default function Register() {
               </p>
             </Form>
           </div>
-          <div className="flex flex-col w-[1000px] h-[824px] justify-center items-center bg-[#343859] gap-2">
+          <div className="md:flex hidden flex-col w-[1000px] h-[824px] justify-center items-center bg-[#343859] gap-4">
             <Image
-              className="ml-5 max-xl:w-[350px]"
+              className="ml-5 max-xl:w-[380px]"
               src="/register.png"
               alt="register"
               width={590}
