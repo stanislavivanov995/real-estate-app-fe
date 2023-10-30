@@ -11,7 +11,7 @@ export default function Register() {
   //  5. Checkbox for accepting terms
   return (
     <PublicLayout>
-      <div className="flex justify-center m-auto mt-[3em] rounded-[3em] w-6/12 rounded-[3em]">
+      <div className="flex justify-center m-auto mt-[3em] rounded-[3em] w-7/12 rounded-[3em] max-xl:w-4/12">
         <div className="flex flex-col max-sm:ml-[1em] justify-center w-[650px] h-[800px] shadow-2xl items-center pl-[2em] pr-[2em] rounded-tl-[3em] rounded-bl-[3em]">
           <div className="flex flex-col">
             <h1 className="font-bold text-[#09090B] text-3xl">
@@ -25,11 +25,11 @@ export default function Register() {
         </div>
 
         <div className="hidden w-[650px] h-[800px] bg-[#343859] rounded-tr-[3em] rounded-br-[3em] xl:flex">
-          <div className="flex flex-col items-center justify-center gap-[3em] mt-[10px] mx-auto pl-[2em] p-[2em]">
+          <div className="flex flex-col items-center justify-center gap-[2em] mx-auto pl-[2em] p-[2em]">
             <Image
               src="/register.png"
               alt="register"
-              width={400}
+              width={490}
               height={200}
               className="ml-7"
             />
