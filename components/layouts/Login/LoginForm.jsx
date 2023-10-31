@@ -28,7 +28,7 @@ export default function LoginForm() {
       onSubmit={handleFunction}
       validationSchema={validationSchema}
     >
-      <Form className=" mt-[25px] items-center flex flex-col w-[450px]">
+      <Form className="mt-[25px] items-center flex flex-col w-[450px]">
         <div className="w-[350px] sm:w-[450px] mb-4 h-10 bg-indigo-400 bg-opacity-10 rounded-[10px] border-2 border-indigo-400 flex justify-start text-lg items-center pl-2 gap-2.5">
           <Image src={"/email.png"} alt="password" width={20} height={20} />
           <Field

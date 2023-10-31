@@ -5,8 +5,8 @@ import Image from "next/image";
 export default function Register() {
   return (
     <PublicLayout>
-      <div className="flex justify-center m-auto mt-[3em] rounded-[3em] w-7/12 rounded-[3em] max-xl:w-4/12">
-        <div className="flex flex-col max-sm:ml-[1em] justify-center w-[650px] h-[800px] shadow-2xl items-center pl-[2em] pr-[2em] rounded-tl-[3em] rounded-bl-[3em]">
+      <div className="flex justify-center m-auto mt-[3em] mb-[3em] rounded-[3em] w-7/12 rounded-[3em] max-xl:w-4/12">
+        <div className="flex flex-col max-sm:ml-[1em] max-lg:rounded-[3em] justify-center w-[650px] h-[800px] shadow-2xl items-center pl-[2em] pr-[2em] rounded-tl-[3em] rounded-bl-[3em]">
           <div className="flex flex-col">
             <h1 className="font-bold text-[#09090B] text-3xl">
               Create your account
