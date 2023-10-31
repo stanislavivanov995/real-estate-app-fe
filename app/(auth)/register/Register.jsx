@@ -3,12 +3,6 @@ import RegisterForm from "@/components/layouts/Register/RegisterForm";
 import Image from "next/image";
 
 export default function Register() {
-  // TODO: Register form must have the following inputs + validations:
-  //  1. First & Last names
-  //  2. Email
-  //  3. Password
-  //  4. Re-password
-  //  5. Checkbox for accepting terms
   return (
     <PublicLayout>
       <div className="flex justify-center m-auto mt-[3em] rounded-[3em] w-7/12 rounded-[3em] max-xl:w-4/12">
