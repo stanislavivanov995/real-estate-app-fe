@@ -51,12 +51,12 @@ export default function LoginForm() {
               width={20}
               height={20}
             />
-            <Field
+            <input
               placeholder="Password"
               type="password"
               name="password"
               id="password"
-              className="bg-transparent outline-none w-full text-[15px]"
+              className="bg-transparent border-none outline-none w-full text-[15px]"
             />
           </div>
           <div className="mr-[10px] opacity-20">
