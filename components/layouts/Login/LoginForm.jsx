@@ -1,8 +1,10 @@
 "use client";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import Image from "next/image.js";
 import * as Yup from "yup";
+
+import Image from "next/image.js";
+import Link from "next/link";
 
 const initialValues = {
   email: "",
@@ -79,9 +81,9 @@ export default function LoginForm() {
               Remember me
             </label>
           </div>
-          <a href="#" className="text-indigo-400 mr-2 text-[15px]">
+          <Link href="#" className="text-indigo-400 mr-2 text-[15px]">
             Forgot Passowrd?
-          </a>
+          </Link>
         </div>
         <button
           type="submit"
