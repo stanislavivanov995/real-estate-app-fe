@@ -1,8 +1,10 @@
 "use client";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
-import Image from "next/image.js";
 import * as Yup from "yup";
+
+import Image from "next/image.js";
+import Link from "next/link";
 
 const initialValues = {
   email: "",
@@ -28,7 +30,7 @@ export default function LoginForm() {
       onSubmit={handleFunction}
       validationSchema={validationSchema}
     >
-      <Form className=" mt-[25px] items-center flex flex-col w-[450px]">
+      <Form className="mt-[25px] items-center flex flex-col w-[450px]">
         <div className="w-[350px] sm:w-[450px] mb-4 h-10 bg-indigo-400 bg-opacity-10 rounded-[10px] border-2 border-indigo-400 flex justify-start text-lg items-center pl-2 gap-2.5">
           <Image src={"/email.png"} alt="password" width={20} height={20} />
           <Field
@@ -51,12 +53,12 @@ export default function LoginForm() {
               width={20}
               height={20}
             />
-            <Field
+            <input
               placeholder="Password"
               type="password"
               name="password"
               id="password"
-              className="bg-transparent outline-none w-full text-[15px]"
+              className="bg-transparent border-none outline-none w-full text-[15px]"
             />
           </div>
           <div className="mr-[10px] opacity-20">
@@ -79,9 +81,9 @@ export default function LoginForm() {
               Remember me
             </label>
           </div>
-          <a href="#" className="text-indigo-400 mr-2 text-[15px]">
+          <Link href="#" className="text-indigo-400 mr-2 text-[15px]">
             Forgot Passowrd?
-          </a>
+          </Link>
         </div>
         <button
           type="submit"
