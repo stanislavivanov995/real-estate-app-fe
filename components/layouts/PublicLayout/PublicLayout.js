@@ -45,6 +45,14 @@ export default function PublicLayout({ children }) {
           >
             Register
           </Link>
+          <Link
+            className={
+              "px-4 py-1 border shadow rounded-md hover:bg-light-500 hover:text-light-100"
+            }
+            href={"admin/dashboard"}
+          >
+            Dashboard
+          </Link>
         </nav>
       </header>
       {children}
