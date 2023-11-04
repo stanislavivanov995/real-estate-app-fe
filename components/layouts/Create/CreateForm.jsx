@@ -19,6 +19,49 @@ export default function CreateForm() {
             placeholder="Type product name"
           />
         </div>
+        <div className="sm:col-span-2">
+          <label
+            htmlFor="location"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Location
+          </label>
+          <input
+            type="text"
+            name="location"
+            id="location"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            placeholder="Property location"
+          />
+        </div>
+        <div className="sm:col-span-2">
+          <label
+            htmlhtmlFor="price"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Price
+          </label>
+          <div className="flex bg-gray-50 border border-gray-300 rounded-lg focus:bg-red-500">
+            <div className="ml-auto m-2 ml-[0.5em]">
+              <select
+                name="price-type"
+                id="price-type"
+                className="bg-transparent outline-none"
+              >
+                <option value="EUR">EUR</option>
+                <option value="BGN">BGN</option>
+                <option value="CRN">CRN</option>
+              </select>
+            </div>
+            <input
+              type="number"
+              name="price"
+              id="price"
+              className="bg-gray-50 outline-none text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              placeholder="$2999"
+            />
+          </div>
+        </div>
         <div>
           <label
             htmlFor="category"
@@ -41,21 +84,6 @@ export default function CreateForm() {
         </div>
         <div className="w-full">
           <label
-            htmlhtmlFor="price"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Price
-          </label>
-          <input
-            type="number"
-            name="price"
-            id="price"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="$2999"
-          />
-        </div>
-        <div className="w-full">
-          <label
             htmlhtmlFor="rooms"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
@@ -67,21 +95,6 @@ export default function CreateForm() {
             id="rooms"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
             placeholder="2"
-          />
-        </div>
-        <div>
-          <label
-            htmlFor="location"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-          >
-            Location
-          </label>
-          <input
-            type="text"
-            name="location"
-            id="location"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            placeholder="Property location"
           />
         </div>
         <div className="sm:col-span-2">
@@ -97,6 +110,46 @@ export default function CreateForm() {
             className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
             placeholder="Your description here"
           ></textarea>
+        </div>
+        <div className="sm:col-span-2">
+          <label
+            htmlFor="dropzone-file"
+            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+          >
+            Choose images
+          </label>
+          <div class="flex items-center justify-center w-full">
+            <label
+              htmFor="dropzone-file"
+              class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+            >
+              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg
+                  class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 16"
+                >
+                  <path
+                    stroke="currentColor"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                  />
+                </svg>
+                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  <span class="font-semibold">Click to upload</span> or drag and
+                  drop
+                </p>
+                <p class="text-xs text-gray-500 dark:text-gray-400 mx-3">
+                  SVG, PNG, JPG or GIF (MAX. 800x400px)
+                </p>
+              </div>
+              <input id="dropzone-file" type="file" class="hidden" />
+            </label>
+          </div>
         </div>
       </div>
       <button

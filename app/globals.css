@@ -10,3 +10,17 @@
     @apply bg-background text-foreground;
   }
 } */
+
+.custom-scrollbar {
+  scrollbar-color: rgb(114, 114, 255);
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 3em;
+  background-color: rgb(110, 110, 232, 0.3);
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgb(110, 110, 232);
+}
