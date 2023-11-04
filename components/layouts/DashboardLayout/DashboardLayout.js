@@ -6,7 +6,7 @@ export default function DashboardLayout({ children }) {
   return (
     <div className="flex justify-center">
       <Sidebar />
-      <div className="flex flex-col items-center w-screen">
+      <div className="flex flex-col items-center w-screen h-screen">
         <Navbar />
         {children}
         <Footer />
