@@ -10,7 +10,3 @@
     @apply bg-background text-foreground;
   }
 } */
-
-.smaller-screen {
-  height: 90vh;
-}

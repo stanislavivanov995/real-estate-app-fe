@@ -8,7 +8,7 @@ export default function Sidebar() {
         data-drawer-toggle="separator-sidebar"
         aria-controls="separator-sidebar"
         type="button"
-        className="fixed top-5 left-0 inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+        className="absolute top-5 left-0 inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       >
         <span className="sr-only">Open sidebar</span>
         <svg
@@ -28,11 +28,12 @@ export default function Sidebar() {
 
       <aside
         id="separator-sidebar"
-        className="max-sm:hidden z-40 w-[35em] h-screen transition-transform -translate-x-[30em] sm:translate-x-0"
+        className="max-sm:hidden z-40 w-[35em] transition-transform -translate-x-[30em] sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50 dark:bg-gray-800">
-          <ul className="space-y-2 font-medium">
+        <div className="h-full px-3 py-4 overflow-y-auto bg-indigo-300 dark:bg-gray-800">
+          <div className="font-bold text-3xl text-gray-700 ml-2">Reservio</div>
+          <ul className="space-y-2 font-medium border-t border-gray-200 mt-5">
             <li>
               <Link
                 href="estates/create"

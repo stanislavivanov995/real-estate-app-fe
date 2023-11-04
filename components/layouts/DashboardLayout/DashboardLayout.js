@@ -4,11 +4,11 @@ import Footer from "@/components/dashboard components/Footer/Footer";
 
 export default function DashboardLayout({ children }) {
   return (
-    <div className="flex">
+    <div className="flex h-screen">
       <Sidebar />
-      <div className="flex flex-col items-center w-screen h-screen">
+      <div className="flex flex-col w-screen h-full">
         <Navbar />
-        {children}
+        <div className="overflow-y-auto m-auto">{children}</div>
         <Footer />
       </div>
     </div>

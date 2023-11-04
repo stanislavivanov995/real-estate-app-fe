@@ -1,21 +1,15 @@
 "use client";
 
-import Image from "next/image.js";
-import Link from "next/link";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
+import Link from "next/link";
 
 export default function Header() {
   return (
     <Navbar fluid rounded className="shadow-lg w-full p-7">
-      <Navbar.Brand href="https://flowbite-react.com">
-        <Image
-          src="/website-logo.png"
-          className="mr-3 h-6 sm:h-9 max-sm:ml-10"
-          alt="Flowbite React Logo"
-          width={150}
-          height={150}
-        />
-      </Navbar.Brand>
+      <div className="font-bold ml-3 max-sm:hidden">DASHBOARD</div>
+      <div className="hidden max-sm:block font-bold text-3xl text-gray-700 ml-8">
+        Reservio
+      </div>
       <div className="flex md:order-2">
         <Dropdown
           arrowIcon={false}
