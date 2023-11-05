@@ -1,6 +1,11 @@
+"use client";
+
 import * as Yup from "yup";
+import { useState } from "react";
 
 export default function CreateForm() {
+  const [selectedCurrency, setSelectedCurrency] = useState("lv");
+
   return (
     <form action="post">
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
@@ -36,30 +41,37 @@ export default function CreateForm() {
         </div>
         <div className="sm:col-span-2">
           <label
-            htmlhtmlFor="price"
+            htmlFor="price"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Price
           </label>
           <div className="flex bg-gray-50 border border-gray-300 rounded-lg focus:bg-red-500">
-            <div className="ml-auto m-2 ml-[0.5em]">
+            <div className="relative w-full">
+              <span className="absolute top-0 left-0 px-2.5 py-2 font-bold text-gray-900 text-md dark:text-white">
+                {selectedCurrency}
+              </span>
+              <input
+                type="number"
+                name="price"
+                id="price"
+                className="bg-gray-50 pl-8 outline-none text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full block p-[0.8em] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="0.00"
+              />
+            </div>
+            <div className="m-2 mr-[1em]">
               <select
+                defaultValue={"lv"}
                 name="price-type"
                 id="price-type"
                 className="bg-transparent outline-none"
+                onChange={(e) => setSelectedCurrency(e.target.value)}
               >
-                <option value="EUR">EUR</option>
-                <option value="BGN">BGN</option>
-                <option value="CRN">CRN</option>
+                <option value="lv">BGN</option>
+                <option value="€">EUR</option>
+                <option value="$">USD</option>
               </select>
             </div>
-            <input
-              type="number"
-              name="price"
-              id="price"
-              className="bg-gray-50 outline-none text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              placeholder="$2999"
-            />
           </div>
         </div>
         <div>
@@ -70,6 +82,7 @@ export default function CreateForm() {
             Category
           </label>
           <select
+            defaultValue={""}
             id="category"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
           >
@@ -84,7 +97,7 @@ export default function CreateForm() {
         </div>
         <div className="w-full">
           <label
-            htmlhtmlFor="rooms"
+            htmlFor="rooms"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Rooms count
@@ -99,7 +112,7 @@ export default function CreateForm() {
         </div>
         <div className="sm:col-span-2">
           <label
-            htmlhtmlFor="description"
+            htmlFor="description"
             className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
           >
             Description
@@ -118,14 +131,14 @@ export default function CreateForm() {
           >
             Choose images
           </label>
-          <div class="flex items-center justify-center w-full">
+          <div className="flex items-center justify-center w-full">
             <label
-              htmFor="dropzone-file"
-              class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
+              htmlFor="dropzone-file"
+              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
             >
-              <div class="flex flex-col items-center justify-center pt-5 pb-6">
+              <div className="flex flex-col items-center justify-center pt-5 pb-6">
                 <svg
-                  class="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -139,22 +152,22 @@ export default function CreateForm() {
                     d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
                   />
                 </svg>
-                <p class="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span class="font-semibold">Click to upload</span> or drag and
-                  drop
+                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                  <span className="font-semibold">Click to upload</span> or drag
+                  and drop
                 </p>
-                <p class="text-xs text-gray-500 dark:text-gray-400 mx-3">
+                <p className="text-xs text-gray-500 dark:text-gray-400 mx-3">
                   SVG, PNG, JPG or GIF (MAX. 800x400px)
                 </p>
               </div>
-              <input id="dropzone-file" type="file" class="hidden" />
+              <input id="dropzone-file" type="file" className="hidden" />
             </label>
           </div>
         </div>
       </div>
       <button
         type="submit"
-        className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+        className="inline-flex items-center px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover-bg-primary-800"
       >
         Post
       </button>
