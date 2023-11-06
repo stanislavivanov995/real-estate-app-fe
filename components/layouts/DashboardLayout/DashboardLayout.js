@@ -8,7 +8,7 @@ export default function DashboardLayout({ children }) {
       <Sidebar />
       <div className="flex flex-col w-screen h-full">
         <Header />
-        <div className="overflow-y-auto m-auto custom-scrollbar">
+        <div className=" custom-scrollbar">
           {children}
         </div>
         <Footer />
