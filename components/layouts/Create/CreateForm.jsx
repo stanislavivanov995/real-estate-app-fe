@@ -3,11 +3,28 @@
 import * as Yup from "yup";
 import { useState } from "react";
 
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
+
 export default function CreateForm() {
   const [selectedCurrency, setSelectedCurrency] = useState("lv");
+  const [address, setAddress] = useState("");
+  const [coordinates, setCoordinates] = useState({
+    lang: null,
+    lng: null,
+  });
+
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value);
+    const ll = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(ll);
+  };
 
   return (
-    <form action="post" className="">
+    <form action="post">
       <div className="flex sm:flex-row  flex-col justify-between sm:w-[90em] w-[22em] sm:items-start items-center">
         <div className="sm:w-[50em] w-[22em]">
           <div className="sm:col-span-2">
@@ -32,18 +49,64 @@ export default function CreateForm() {
             >
               Location
             </label>
-            <input
-              type="text"
-              name="location"
-              id="location"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              placeholder="Property location"
-            />
+            <PlacesAutocomplete
+              value={address}
+              onChange={setAddress}
+              onSelect={handleSelect}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div key={suggestions.description}>
+                  <input
+                    type="text"
+                    name="location"
+                    id="location"
+                    {...getInputProps({
+                      placeholder: "Search Places ...",
+                      className: "location-search-input",
+                    })}
+                    className="bg-gray-50 mb-3 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Property location"
+                  />
+                  <div className="autocomplete-dropdown-container">
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion) => {
+                      const className = suggestion.active
+                        ? "suggestion-item--active"
+                        : "suggestion-item";
+                      const style = suggestion.active
+                        ? {
+                            display: "flex",
+                            cursor: "pointer",
+                          }
+                        : {
+                            display: "flex",
+                            cursor: "pointer",
+                          };
+                      return (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                            style,
+                          })}
+                        >
+                          <span className="p-5">{suggestion.description}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
           </div>
           <div className="sm:col-span-2">
             <label
               htmlFor="price"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white"
             >
               Price
             </label>

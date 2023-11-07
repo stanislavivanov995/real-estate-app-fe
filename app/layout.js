@@ -17,6 +17,7 @@ export default function RootLayout({ children }) {
           src="https://kit.fontawesome.com/ff1e263a7b.js"
           crossOrigin="anonymous"
         ></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOQd7UoVJHt28wLiHMD0ZY0S_AiONShyo&libraries=places"></script>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
