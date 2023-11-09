@@ -1,11 +1,11 @@
-export default function TopRatedPropertyCard({propertyName,city}) {
+export default function TopRatedPropertyCard({propertyName,city,imgUrl,alt}) {
     return (
         <div className="rounded-xl border bg-white shadow-md">
 
-            <img className={'bg-slate-300 rounded-t-xl'} style={{height: '300px'}}
-                 src={'/assets/propertyone.png'}
+            <img className={'rounded-t-xl bg-slate-300'} style={{height: '300px'}}
+                 src={imgUrl}
+                 alt={alt}/>
                  width={'100%'}
-                 alt={'Property One Image'}/>
 
             <div className={'p-6'}>
 

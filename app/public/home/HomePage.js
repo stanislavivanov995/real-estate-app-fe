@@ -25,6 +25,8 @@ export default function HomePage() {
                 {
                     topRatedProperties.map(property =>
                     <TopRatedPropertyCard key={property.id}
+                                          imgUrl={property.imgUrl}
+                                          alt={property.alt}
                                           propertyName={property.name}
                                           city={property.city} />)
                 }
