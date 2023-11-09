@@ -60,9 +60,9 @@ export default function CreateForm() {
   };
 
   return (
-    <form action="post">
-      <div className="flex sm:flex-row  flex-col justify-between sm:w-[90em] w-[22em] sm:items-start items-center">
-        <div className="sm:w-[50em] w-[22em]">
+    <form action="post" className="w-full">
+      <div className="flex flex-col justify-center sm:w-[90em] md:w-[38em] w-[22em] gap-5 sm:items-start items-center">
+        <div className="sm:w-[50em] md:w-[38em] lg:w-[38em] w-[22em]">
           <div className="sm:col-span-2">
             <label
               htmlFor="name"
@@ -224,7 +224,7 @@ export default function CreateForm() {
             ></textarea>
           </div>
         </div>
-        <div className="flex items-center justify-center w-full">
+        <div className="sm:w-[50em] md:w-[38em] lg:w-[38em] w-[22em]">
           <label
             htmlFor="dropzone-file"
             className="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover-bg-gray-100 dark:border-gray-600 dark:hover-border-gray-500 dark:hover-bg-gray-600"
@@ -296,7 +296,7 @@ export default function CreateForm() {
       </div>
       <button
         type="submit"
-        className="items-center sm:ml-2 ml-0 w-[25em] sm:w-[10em] px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover-bg-primary-800"
+        className="items-center w-[25em] sm:w-[10em] px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover-bg-primary-800"
       >
         Post
       </button>
