@@ -3,11 +3,64 @@
 import * as Yup from "yup";
 import { useState } from "react";
 
+import PlacesAutocomplete, {
+  geocodeByAddress,
+  getLatLng,
+} from "react-places-autocomplete";
+
 export default function CreateForm() {
   const [selectedCurrency, setSelectedCurrency] = useState("lv");
+  const [selectedCategory, setSelectedCategory] = useState("");
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const [address, setAddress] = useState("");
+  const [coordinates, setCoordinates] = useState({
+    lang: null,
+    lng: null,
+  });
+
+  const handleSelect = async (value) => {
+    const results = await geocodeByAddress(value);
+    const ll = await getLatLng(results[0]);
+    setAddress(value);
+    setCoordinates(ll);
+  };
+
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [fileStatus, setFileStatus] = useState(
+    "Click to upload or drag and drop"
+  );
+
+  const handleFileInputChange = (e) => {
+    const files = Array.from(e.target.files);
+    setSelectedFiles([...selectedFiles, ...files]);
+    setFileStatus("Files selected");
+  };
+
+  const handleFileDrop = (e) => {
+    e.preventDefault();
+    const files = Array.from(e.dataTransfer.files);
+    setSelectedFiles([...selectedFiles, ...files]);
+    setFileStatus("Files dropped");
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    setFileStatus("Drop here");
+  };
+
+  const handleRemoveFile = (index) => {
+    const updatedFiles = [...selectedFiles];
+    updatedFiles.splice(index, 1);
+    setSelectedFiles(updatedFiles);
+    setFileStatus("File removed");
+  };
 
   return (
-    <form action="post" className="">
+    <form action="post">
       <div className="flex sm:flex-row  flex-col justify-between sm:w-[90em] w-[22em] sm:items-start items-center">
         <div className="sm:w-[50em] w-[22em]">
           <div className="sm:col-span-2">
@@ -32,18 +85,64 @@ export default function CreateForm() {
             >
               Location
             </label>
-            <input
-              type="text"
-              name="location"
-              id="location"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              placeholder="Property location"
-            />
+            <PlacesAutocomplete
+              value={address}
+              onChange={setAddress}
+              onSelect={handleSelect}
+            >
+              {({
+                getInputProps,
+                suggestions,
+                getSuggestionItemProps,
+                loading,
+              }) => (
+                <div key={suggestions.description}>
+                  <input
+                    type="text"
+                    name="location"
+                    id="location"
+                    {...getInputProps({
+                      placeholder: "Search Places ...",
+                      className: "location-search-input",
+                    })}
+                    className="bg-gray-50 mb-3 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    placeholder="Property location"
+                  />
+                  <div className="autocomplete-dropdown-container">
+                    {loading && <div>Loading...</div>}
+                    {suggestions.map((suggestion) => {
+                      const className = suggestion.active
+                        ? "suggestion-item--active"
+                        : "suggestion-item";
+                      const style = suggestion.active
+                        ? {
+                            display: "flex",
+                            cursor: "pointer",
+                          }
+                        : {
+                            display: "flex",
+                            cursor: "pointer",
+                          };
+                      return (
+                        <div
+                          {...getSuggestionItemProps(suggestion, {
+                            className,
+                            style,
+                          })}
+                        >
+                          <span className="p-5">{suggestion.description}</span>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              )}
+            </PlacesAutocomplete>
           </div>
           <div className="sm:col-span-2">
             <label
               htmlFor="price"
-              className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              className="block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white"
             >
               Price
             </label>
@@ -83,13 +182,12 @@ export default function CreateForm() {
               Category
             </label>
             <select
-              defaultValue={""}
+              value={selectedCategory}
               id="category"
+              onChange={handleCategoryChange}
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
             >
-              <option selected disabled value="Select category">
-                Select category
-              </option>
+              <option value="">Select category</option>
               <option value="TV">TV/Monitors</option>
               <option value="PC">PC</option>
               <option value="GA">Gaming/Console</option>
@@ -126,45 +224,74 @@ export default function CreateForm() {
             ></textarea>
           </div>
         </div>
-        <div className="sm:col-span-2 sm:w-[35em] w-[22em]">
+        <div className="flex items-center justify-center w-full">
           <label
             htmlFor="dropzone-file"
-            className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+            className="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover-bg-gray-100 dark:border-gray-600 dark:hover-border-gray-500 dark:hover-bg-gray-600"
+            onDrop={handleFileDrop}
+            onDragOver={handleDragOver}
           >
-            Choose images
+            <div className="flex flex-col items-center justify-center h-64 py-6">
+              {selectedFiles.length > 0 ? (
+                <div className="grid grid-cols-3 gap-4">
+                  {selectedFiles.map((file, index) => (
+                    <div key={index} className="relative">
+                      <img
+                        src={URL.createObjectURL(file)}
+                        alt={`Image ${index}`}
+                        className="w-32 h-32 object-cover rounded-lg"
+                      />
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleRemoveFile(index);
+                        }}
+                        className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover-bg-red-600 cursor-pointer"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="h-4 w-4"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                <>
+                  <svg
+                    className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 20 16"
+                  ></svg>
+                  <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                    <span className="font-semibold">{fileStatus}</span>
+                  </p>
+                  <p className="text-xs text-gray-500 dark:text-gray-400 mx-3">
+                    SVG, PNG, JPG, or GIF (MAX. 800x400px)
+                  </p>
+                </>
+              )}
+            </div>
+            <input
+              id="dropzone-file"
+              type="file"
+              className="hidden"
+              multiple
+              onChange={handleFileInputChange}
+            />
           </label>
-          <div className="flex items-center justify-center w-full">
-            <label
-              htmlFor="dropzone-file"
-              className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
-            >
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg
-                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 16"
-                >
-                  <path
-                    stroke="currentColor"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                  />
-                </svg>
-                <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span className="font-semibold">Click to upload</span> or drag
-                  and drop
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-400 mx-3">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
-                </p>
-              </div>
-              <input id="dropzone-file" type="file" className="hidden" />
-            </label>
-          </div>
         </div>
       </div>
       <button
