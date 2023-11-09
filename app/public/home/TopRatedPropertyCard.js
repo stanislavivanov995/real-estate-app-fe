@@ -4,8 +4,9 @@ export default function TopRatedPropertyCard({propertyName,city,imgUrl,alt}) {
 
             <img className={'rounded-t-xl bg-slate-300'} style={{height: '300px'}}
                  src={imgUrl}
-                 alt={alt}/>
+                 alt={alt}
                  width={'100%'}
+                 />
 
             <div className={'p-6'}>
 
