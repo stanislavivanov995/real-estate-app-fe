@@ -89,9 +89,9 @@ export default function CreateForm() {
       onSubmit={handleFunction}
       validationSchema={validationSchema}
     >
-      <Form action="post" className="w-full">
-        <div className="flex flex-col justify-center sm:w-[90em] md:w-[38em] w-[22em] gap-5 sm:items-start items-center">
-          <div className="sm:w-[50em] md:w-[38em] lg:w-[38em] w-[22em]">
+      <Form action="post">
+        <div className="flex flex-col justify-center items-center gap-5">
+          <div className="w-[40em] max-md:w-[26em]">
             <div className="sm:col-span-2">
               <label
                 htmlFor="name"
@@ -266,7 +266,7 @@ export default function CreateForm() {
               onDrop={handleFileDrop}
               onDragOver={handleDragOver}
             >
-              <div className="flex flex-col items-center justify-center h-64 py-6">
+              <div className="flex flex-col items-center justify-center h-64 m-w-5 py-6">
                 {selectedFiles.length > 0 ? (
                   <div className="grid grid-cols-3 gap-4">
                     {selectedFiles.map((file, index) => (
