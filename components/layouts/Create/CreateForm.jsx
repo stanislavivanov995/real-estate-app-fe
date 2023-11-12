@@ -64,22 +64,22 @@ export default function CreateForm() {
     name: "",
     location: "",
     price: 0,
-    category: selectedCategory,
-    currency: selectedCurrency,
+    category: "",
+    currency: "lv",
     rooms: 1,
     description: "",
-    images: selectedFiles,
+    images: [],
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required(),
-    location: Yup.string().required(),
-    price: Yup.number().required(),
-    category: Yup.string().required(),
-    currency: Yup.string(),
-    rooms: Yup.number().required(),
-    description: Yup.string().required(),
-    images: Yup.array().required(),
+    // name: Yup.string().required(),
+    // location: Yup.string().required(),
+    // price: Yup.string().required(),
+    // category: Yup.string().required(),
+    // currency: Yup.string(),
+    // rooms: Yup.number().required(),
+    // description: Yup.string().required(),
+    // images: Yup.array().required(),
   });
 
   function handleFunction(data) {
@@ -159,6 +159,7 @@ export default function CreateForm() {
                             };
                         return (
                           <div
+                            key={suggestion.placeId}
                             {...getSuggestionItemProps(suggestion, {
                               className,
                               style,
@@ -188,7 +189,7 @@ export default function CreateForm() {
                     {selectedCurrency}
                   </span>
                   <Field
-                    type="number"
+                    type="text"
                     name="price"
                     id="price"
                     className="bg-gray-50 pl-8 outline-none text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full block p-[0.8em] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
