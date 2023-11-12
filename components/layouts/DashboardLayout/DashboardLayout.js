@@ -6,7 +6,7 @@ export default function DashboardLayout({ children }) {
   return (
     <div className="flex h-full">
       <Sidebar />
-      <div className="flex flex-col w-screen h-full items-center justify-center">
+      <div className="flex flex-col w-screen min-h-screen items-center justify-center">
         <Header />
         <div className="custom-scrollbar h-full">{children}</div>
         <Footer />

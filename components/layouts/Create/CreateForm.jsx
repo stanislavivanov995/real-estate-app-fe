@@ -62,21 +62,24 @@ export default function CreateForm() {
 
   const initialValues = {
     name: "",
-    address: "",
-    lang: coordinates?.lang,
-    lng: coordinates?.lng,
+    location: "",
     price: 0,
-    priceType: "lv",
-    category: "",
+    category: selectedCategory,
     currency: selectedCurrency,
     rooms: 1,
     description: "",
-    images: [],
+    images: selectedFiles,
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required(),
     location: Yup.string().required(),
+    price: Yup.number().required(),
+    category: Yup.string().required(),
+    currency: Yup.string(),
+    rooms: Yup.number().required(),
+    description: Yup.string().required(),
+    images: Yup.array().required(),
   });
 
   function handleFunction(data) {
@@ -91,7 +94,7 @@ export default function CreateForm() {
     >
       <Form action="post">
         <div className="flex flex-col justify-center items-center gap-5">
-          <div className="w-[40em] max-md:w-[26em]">
+          <div className="w-[40em] max-md:w-[26em] max-sm:w-[18em]">
             <div className="sm:col-span-2">
               <label
                 htmlFor="name"
@@ -109,8 +112,8 @@ export default function CreateForm() {
             </div>
             <div className="sm:col-span-2">
               <label
-                htmlFor="address"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                htmlFor="location"
+                className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Location
               </label>
@@ -125,11 +128,12 @@ export default function CreateForm() {
                   getSuggestionItemProps,
                   loading,
                 }) => (
-                  <div key={suggestions.description}>
+                  <div>
                     <Field
+                      key="location"
                       type="text"
-                      name="address"
-                      id="address"
+                      name="location"
+                      id="location"
                       {...getInputProps({
                         placeholder: "Search Places ...",
                         className: "location-search-input",
@@ -137,6 +141,7 @@ export default function CreateForm() {
                       className="bg-gray-50 mb-3 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Property location"
                     />
+
                     <div className="autocomplete-dropdown-container">
                       {loading && <div>Loading...</div>}
                       {suggestions.map((suggestion) => {
@@ -173,7 +178,7 @@ export default function CreateForm() {
             <div className="sm:col-span-2">
               <label
                 htmlFor="price"
-                className="block mb-2 mt-3 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Price
               </label>
@@ -193,15 +198,42 @@ export default function CreateForm() {
                 <div className="m-2 mr-[1em]">
                   <Field
                     as="select"
-                    defaultValue={"lv"}
-                    name="price-type"
-                    id="price-type"
-                    className="bg-transparent outline-none"
+                    name="currency"
+                    id="currency"
+                    value={selectedCurrency}
+                    className="rounded-lg bg-transparent"
                     onChange={(e) => setSelectedCurrency(e.target.value)}
                   >
-                    <option value="lv">BGN</option>
-                    <option value="€">EUR</option>
-                    <option value="$">USD</option>
+                    <option
+                      value="lv"
+                      className={
+                        selectedCurrency === "lv"
+                          ? "bg-indigo-300"
+                          : "bg-gray-200"
+                      }
+                    >
+                      BGN
+                    </option>
+                    <option
+                      value="€"
+                      className={
+                        selectedCurrency === "€"
+                          ? "bg-indigo-300"
+                          : "bg-gray-200"
+                      }
+                    >
+                      EUR
+                    </option>
+                    <option
+                      value="$"
+                      className={
+                        selectedCurrency === "$"
+                          ? "bg-indigo-300"
+                          : "bg-gray-200"
+                      }
+                    >
+                      USD
+                    </option>
                   </Field>
                 </div>
               </div>
@@ -209,18 +241,19 @@ export default function CreateForm() {
             <div>
               <label
                 htmlFor="category"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Category
               </label>
               <Field
                 as="select"
+                name="category"
                 id="category"
                 value={selectedCategory}
                 onChange={handleCategoryChange}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
               >
-                <option value="">Select category</option>
+                <option value="asd">Select category</option>
                 <option value="TV">TV/Monitors</option>
                 <option value="PC">PC</option>
                 <option value="GA">Gaming/Console</option>
@@ -230,7 +263,7 @@ export default function CreateForm() {
             <div className="w-full">
               <label
                 htmlFor="rooms"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Rooms count
               </label>
@@ -245,43 +278,43 @@ export default function CreateForm() {
             <div className="sm:col-span-2">
               <label
                 htmlFor="description"
-                className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-2 mt-4 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Description
               </label>
               <Field
                 as="textarea"
-                id="description"
                 name="description"
+                id="description"
                 rows="8"
                 className="block p-2.5 w-full text-sm resize-none text-gray-900 bg-gray-50 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Your description here"
-              ></Field>
+              />
             </div>
           </div>
-          <div className="sm:w-[50em] md:w-[38em] lg:w-[38em] w-[22em]">
+          <div className="w-full">
             <label
               htmlFor="images"
               className="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover-bg-gray-100 dark:border-gray-600 dark:hover-border-gray-500 dark:hover-bg-gray-600"
               onDrop={handleFileDrop}
               onDragOver={handleDragOver}
             >
-              <div className="flex flex-col items-center justify-center h-64 m-w-5 py-6">
+              <div className="flex flex-col items-center justify-center h-64">
                 {selectedFiles.length > 0 ? (
-                  <div className="grid grid-cols-3 gap-4">
+                  <div className="flex gap-5 max-w-[30em] flex-wrap items-center justify-center">
                     {selectedFiles.map((file, index) => (
                       <div key={index} className="relative">
                         <img
                           src={URL.createObjectURL(file)}
                           alt={`Image ${index}`}
-                          className="w-32 h-32 object-cover rounded-lg"
+                          className="w-16 h-16 object-cover rounded-lg"
                         />
                         <button
                           onClick={(e) => {
                             e.preventDefault();
                             handleRemoveFile(index);
                           }}
-                          className="absolute top-2 right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover-bg-red-600 cursor-pointer"
+                          className="absolute top-0.5 right-0.5 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center hover-bg-red-600 cursor-pointer"
                         >
                           <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -320,22 +353,22 @@ export default function CreateForm() {
                 )}
               </div>
               <Field
-                id="images"
-                name="images"
                 type="file"
+                name="images"
+                id="images"
                 className="hidden"
                 multiple
                 onChange={handleFileInputChange}
               />
             </label>
           </div>
+          <button
+            type="submit"
+            className="w-full h-12 bg-blue-600 rounded-[10px] text-white text-lg font-bold mt-2"
+          >
+            POST
+          </button>
         </div>
-        <button
-          type="submit"
-          className="items-center w-[25em] sm:w-[10em] px-5 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-blue-500 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover-bg-primary-800"
-        >
-          Post
-        </button>
       </Form>
     </Formik>
   );
