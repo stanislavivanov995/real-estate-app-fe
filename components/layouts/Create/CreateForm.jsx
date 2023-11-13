@@ -83,7 +83,12 @@ export default function CreateForm() {
   });
 
   function handleFunction(data) {
-    console.log(Object.values(data));
+    const formData = {};
+    Object.keys(data).forEach((key) => {
+      formData[key] = data[key];
+    });
+  
+    console.log(JSON.stringify(formData, null, 2));
   }
 
   return (
