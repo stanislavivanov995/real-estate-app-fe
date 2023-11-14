@@ -1,6 +1,10 @@
+'use client';
 import Link from "next/link";
+import {usePathname} from "next/navigation";
 
 export default function PublicLayout({children}) {
+
+    const pathname = usePathname();
 
     const publicNavLinks = [
         {href: '/', name: 'Home'},
@@ -24,7 +28,8 @@ export default function PublicLayout({children}) {
                             publicNavLinks.map(link =>
 
                                 <Link key={link.href}
-                                    className={'text-[15px] font-medium text-blue-950 hover:text-blue-800 hover:underline'}
+                                    className={`${pathname === link.href ? 'text-blue-800 underline' : ''} 
+                                    text-[15px] font-medium text-blue-950 hover:text-blue-800 hover:underline`}
                                     href={link.href}
                                 >
                                     {link.name}
