@@ -20,8 +20,12 @@ export default function HomePage() {
         <PublicLayout>
             <main className={'min-h-screen bg-gray-100'}>
 
-                <h1 className="py-16 text-center text-[54px] font-bold tracking-tighter">Welcome to the best booking
+                <h1 className="pt-16 text-center text-[54px] font-bold tracking-tighter">Welcome to the best booking
                     website.</h1>
+
+                <h3 className={'mb-16 pt-2 text-center text-[19px]'}>
+                    The best platform where you can easily list, search, and book rental properties.
+                </h3>
 
                 {/* Search bar */}
                 <SearchProperty/>
