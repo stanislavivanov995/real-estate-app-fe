@@ -1,17 +1,8 @@
-'use client';
-import Link from "next/link";
-import {usePathname} from "next/navigation";
+import PublicNavLinks from "@/components/layouts/PublicLayout/PublicNavLinks";
 
 export default function PublicLayout({children}) {
 
-    const pathname = usePathname();
 
-    const publicNavLinks = [
-        {href: '/', name: 'Home'},
-        {href: '/public/faq', name: 'FAQ'},
-        {href: '/public/about', name: 'About'},
-        {href: '/public/contacts', name: 'Contacts'},
-    ];
 
     return (
         <>
@@ -23,20 +14,7 @@ export default function PublicLayout({children}) {
                     <div>SITE LOGO</div>
 
                     {/* Nav Links */}
-                    <nav className={"flex items-center gap-10"}>
-                        {
-                            publicNavLinks.map(link =>
-
-                                <Link key={link.href}
-                                    className={`${pathname === link.href ? 'text-blue-800 underline' : ''} 
-                                    text-[15px] font-medium text-blue-950 hover:text-blue-800 hover:underline`}
-                                    href={link.href}
-                                >
-                                    {link.name}
-                                </Link>
-                            )
-                        }
-                    </nav>
+                    <PublicNavLinks />
 
                 </div>
 
