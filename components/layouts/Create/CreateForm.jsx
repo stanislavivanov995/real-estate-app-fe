@@ -2,7 +2,7 @@
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
@@ -11,7 +11,21 @@ import PlacesAutocomplete, {
 
 export default function CreateForm() {
   const [selectedCurrency, setSelectedCurrency] = useState("lv");
-  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("1");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const fetchedCategories = await getCategoryData();
+        setCategories(fetchedCategories);
+      } catch (error) {
+        // error
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value);
@@ -83,13 +97,30 @@ export default function CreateForm() {
   });
 
   function handleFunction(data) {
-    const formData = {};
-    Object.keys(data).forEach((key) => {
-      formData[key] = data[key];
-    });
+    const formData = {
+      ...data,
+      category: selectedCategory,
+      currency: selectedCurrency, 
+    };
   
     console.log(JSON.stringify(formData, null, 2));
   }
+  
+
+  const getCategoryData = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/list-categories");
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+  
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error:", error.message);
+      return [];
+    }
+  };
 
   return (
     <Formik
@@ -252,19 +283,19 @@ export default function CreateForm() {
                 Category
               </label>
               <Field
-                as="select"
-                name="category"
-                id="category"
-                value={selectedCategory}
-                onChange={handleCategoryChange}
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-              >
-                <option value="asd">Select category</option>
-                <option value="TV">TV/Monitors</option>
-                <option value="PC">PC</option>
-                <option value="GA">Gaming/Console</option>
-                <option value="PH">Phones</option>
-              </Field>
+              as="select"
+              name="category"
+              id="category"
+              value={selectedCategory}
+              onChange={handleCategoryChange}
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+            >
+              {categories.map((category) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
+            </Field>
             </div>
             <div className="w-full">
               <label
@@ -274,7 +305,7 @@ export default function CreateForm() {
                 Rooms count
               </label>
               <Field
-                type="number"
+                type="text"
                 name="rooms"
                 id="rooms"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
