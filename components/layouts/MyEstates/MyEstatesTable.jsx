@@ -1,8 +1,8 @@
 import Link from "next/link.js";
 
-export default function MyEstatesTable() {
+export default function MyEstatesTable({ estatesData }) {
   return (
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg w-[1300px]">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg sm:w-[650px] md:w-[700px] 2xl:w-[1300px] lg:w-[750px] lg:mx-5 w-[400px]">
       <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
@@ -24,42 +24,48 @@ export default function MyEstatesTable() {
           </tr>
         </thead>
         <tbody>
-          <tr class="odd:bg-white h-[5em] text-lg odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-            <th
-              scope="row"
-              class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-            >
-              Hotel Lavaza
-            </th>
-            <td class="px-6 py-4">Burgas, Bulgaria</td>
-            <td class="px-6 py-4">Hotel</td>
-            <td class="px-6 py-4">$899</td>
-            <td class="px-6 py-4">
-              <div className="flex items-center gap-5">
-                <button
-                  href="#"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  <i class="fa-solid fa-pencil"></i>
-                </button>
-                <button
-                  href="#"
-                  class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
-                >
-                  <i class="fa-solid fa-trash"></i>
-                </button>
-                <Link href={""}>
+          {estatesData.map((estate) => (
+            <tr class="odd:bg-white h-[5em] text-lg odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+              <th
+                scope="row"
+                class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                {estate.propertyName}
+              </th>
+              <td class="px-6 py-4">{estate.location}</td>
+              <td class="px-6 py-4">{estate.category}</td>
+              <td class="px-6 py-4">
+                {estate.price}
+                {estate.currency}
+              </td>
+              <td class="px-6 py-4">
+                <div className="flex items-center gap-5">
                   <button
                     href="#"
                     class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
-                    <i class="fa-solid fa-eye"></i>
+                    <i class="fa-solid fa-pencil"></i>
                   </button>
-                </Link>
-              </div>
-            </td>
-          </tr>
-          <tr class="odd:bg-white h-[5em] text-lg odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <button
+                    href="#"
+                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                  >
+                    <i class="fa-solid fa-trash"></i>
+                  </button>
+                  <Link href={""}>
+                    <button
+                      href="#"
+                      class="font-medium text-blue-600 dark:text-blue-500 hover:underline"
+                    >
+                      <i class="fa-solid fa-eye"></i>
+                    </button>
+                  </Link>
+                </div>
+              </td>
+            </tr>
+          ))}
+
+          {/* <tr class="odd:bg-white h-[5em] text-lg odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
             <th
               scope="row"
               class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -128,7 +134,7 @@ export default function MyEstatesTable() {
                 </Link>
               </div>
             </td>
-          </tr>
+          </tr> */}
         </tbody>
       </table>
     </div>
