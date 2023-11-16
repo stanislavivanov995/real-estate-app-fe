@@ -9,13 +9,11 @@ const initialValues = {
   firstName: "",
   lastName: "",
   email: "",
-  phone: "",
   password: "",
   confirmPassword: "",
   toggle: false,
 };
 
-const phoneRegExp = /08[789]\d{7}/;
 
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
@@ -29,7 +27,6 @@ const validationSchema = Yup.object().shape({
   email: Yup.string()
     .required("Email is required!")
     .email("Email must be valid"),
-  phone: Yup.string().matches(phoneRegExp, "Phone number is not valid"),
   password: Yup.string().required("Password is required!"),
   confirmPassword: Yup.string()
     .required("Confirm Password is required!")
@@ -38,8 +35,36 @@ const validationSchema = Yup.object().shape({
 });
 
 function handleFunction(data) {
-  console.log(Object.values(data));
+  const formData = {};
+  Object.keys(data).forEach((fieldName) => {
+    formData[fieldName] = data[fieldName];
+  });
+
+  console.log(formData);
+  sendPostRequest(formData);
 }
+
+
+const sendPostRequest = async (data) => {
+  try {
+    const response = await fetch("http://localhost:8000/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data, null, 2),
+    });
+
+    if (response.ok) {
+      console.log("Registration successful!");
+    } else {
+      console.error("Registration failed!");
+    }
+  } catch (error) {
+    console.error("Error during registration:", error);
+  }
+};
+
 
 export default function RegisterForm() {
   return (
@@ -102,23 +127,6 @@ export default function RegisterForm() {
         />
         <div className="flex gap-2 border-2 items-center h-10 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
           <span>
-            <Image src="/call.png" alt="call" width={23} height={23} />
-          </span>
-          <Field
-            className="indent-2 outline-0 bg-transparent"
-            type="text"
-            name="phone"
-            id="phone"
-            placeholder="Phone ( Optional )"
-          />
-        </div>
-        <ErrorMessage
-          name="phone"
-          component="span"
-          className="text-red-600 text-[14px]"
-        />
-        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
-          <span>
             <Image
               src="/shield-slash.png"
               alt="shield"
@@ -128,7 +136,7 @@ export default function RegisterForm() {
           </span>
           <Field
             className="indent-2 outline-0 bg-transparent"
-            type="text"
+            type="password"
             name="password"
             id="password"
             placeholder="Password"
@@ -150,7 +158,7 @@ export default function RegisterForm() {
           </span>
           <Field
             className="indent-2 outline-0 bg-transparent"
-            type="text"
+            type="password"
             name="confirmPassword"
             id="confirmPassword"
             placeholder="Confirm Password"
