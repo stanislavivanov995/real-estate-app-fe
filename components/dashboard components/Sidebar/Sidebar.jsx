@@ -1,6 +1,14 @@
+"use client";
 import Link from "next/link";
+import { useState } from "react";
 
 export default function Sidebar() {
+  const [isSidebarOn, selectIsSidebarOn] = useState(false);
+
+  const openSidebar = () => {
+    selectIsSidebarOn(!isSidebarOn);
+  };
+
   return (
     <>
       <button
@@ -8,6 +16,7 @@ export default function Sidebar() {
         data-drawer-toggle="separator-sidebar"
         aria-controls="separator-sidebar"
         type="button"
+        onClick={openSidebar}
         className="absolute top-5 left-0 inline-flex items-center p-2 mt-2 ml-3 text-sm text-gray-500 rounded-lg xl:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
       >
         <span className="sr-only">Open sidebar</span>
@@ -26,14 +35,32 @@ export default function Sidebar() {
         </svg>
       </button>
 
+      {isSidebarOn && (
+        <div
+          className="fixed top-0 left-0 w-full h-full bg-black opacity-30 z-30"
+          onClick={openSidebar}
+        ></div>
+      )}
+
       <aside
         id="separator-sidebar"
-        className="max-sm:hidden z-40 w-[34em] min-h-screen transition-transform -translate-x-[30em] max-lg:hidden sm:translate-x-0"
+        className={
+          isSidebarOn === true
+            ? "fixed z-40 w-[20.5em] min-h-screen"
+            : "max-sm:hidden z-40 w-[34em] min-h-screen transition-transform -translate-x-[30em] max-lg:hidden sm:translate-x-0"
+        }
         aria-label="Sidebar"
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-indigo-300 dark:bg-gray-800">
-          <div className="font-bold text-3xl text-gray-700 ml-2 border-b border-gray-200 mb-5 pb-3">
+          <div className="flex justify-between font-bold text-3xl text-gray-700 ml-2 mt-2 border-b border-gray-200 mb-5 pb-3">
             Reservio
+            {isSidebarOn === true ? (
+              <button onClick={openSidebar}>
+                <i className="fa-solid fa-x text-2xl mr-3"></i>
+              </button>
+            ) : (
+              ""
+            )}
           </div>
           <ul className="space-y-5 font-medium">
             <li>
