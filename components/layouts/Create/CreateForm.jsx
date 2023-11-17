@@ -100,12 +100,11 @@ export default function CreateForm() {
     const formData = {
       ...data,
       category: selectedCategory,
-      currency: selectedCurrency, 
+      currency: selectedCurrency,
     };
-  
+
     console.log(JSON.stringify(formData, null, 2));
   }
-  
 
   const getCategoryData = async () => {
     try {
@@ -113,7 +112,7 @@ export default function CreateForm() {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-  
+
       const data = await response.json();
       return data;
     } catch (error) {
@@ -283,19 +282,19 @@ export default function CreateForm() {
                 Category
               </label>
               <Field
-              as="select"
-              name="category"
-              id="category"
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            >
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </Field>
+                as="select"
+                name="category"
+                id="category"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              >
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Field>
             </div>
             <div className="w-full">
               <label
@@ -332,7 +331,7 @@ export default function CreateForm() {
           <div className="w-full">
             <label
               htmlFor="images"
-              className="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover-bg-gray-100 dark:border-gray-600 dark:hover-border-gray-500 dark:hover-bg-gray-600"
+              className="flex flex-col items-center max-md:max-w-[18em] justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover-bg-gray-100 dark:border-gray-600 dark:hover-border-gray-500 dark:hover-bg-gray-600"
               onDrop={handleFileDrop}
               onDragOver={handleDragOver}
             >
