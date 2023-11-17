@@ -2,6 +2,13 @@
 export default function SearchProperty() {
     const handleSubmit = (event) => {
         event.preventDefault();
+        const formData = new FormData(event.currentTarget);
+        const {location, checkIn, checkOut, category} = Object.fromEntries(formData);
+        console.log(location)
+        console.log(checkIn)
+        console.log(checkOut)
+        console.log(category)
+        // TODO: process the data
     };
     return (
         <form onSubmit={handleSubmit}
@@ -24,23 +31,31 @@ export default function SearchProperty() {
 
                 <input
                     className="block w-full rounded-md border border-slate-300 bg-white py-3 pl-9 pr-4 shadow-sm focus:border-blue-700 focus:outline-none focus:ring-1 focus:ring-blue-700"
-                    placeholder="Search City..."
+                    placeholder="Location.."
                     type="search"
-                    name="city"/>
+                    name="location"/>
             </label>
 
-            {/* Date Filter */}
+            {/* Check-in Date Filter */}
             <label>
-                <span>Date: </span>
+                <span>Check-in: </span>
                 <input className={'rounded-md border border-slate-300 p-3'}
-                       name={'date'}
+                       name={'checkIn'}
+                       type="date"/>
+            </label>
+
+            {/* Check-out Date Filter */}
+            <label>
+                <span>Check-out: </span>
+                <input className={'rounded-md border border-slate-300 p-3'}
+                       name={'checkOut'}
                        type="date"/>
             </label>
 
             {/* Select Apartment Type Menu */}
             <label>
-                <span>Guests and Rooms: </span>
-                <select name={'guests_rooms'} className={'rounded-md border border-slate-300 bg-white p-3'}>
+                <span>Category: </span>
+                <select name={'category'} className={'rounded-md border border-slate-300 bg-white p-3'}>
                     <option className={'p-3'} value="2_guests_1_room">2 Guests, 1 Room</option>
                     <option className={'p-3'} value="3_guests_1_room">3 Guests, 1 Room</option>
                     <option className={'p-3'} value="4_guests_2_room">4 Guests, 2 Rooms</option>
