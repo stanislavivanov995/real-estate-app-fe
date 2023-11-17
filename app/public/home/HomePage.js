@@ -33,7 +33,7 @@ export default function HomePage() {
                 {/* Top-rated properties */}
                 <h3 className={'ml-12 mt-14 text-2xl font-semibold'}>Top-rated properties </h3>
 
-                <section className={'m-12 mt-5 grid grid-cols-1 gap-4 md:grid-cols-3'}>
+                <section className={'mx-12 mt-5 pb-20 grid grid-cols-1 gap-4 md:grid-cols-3'}>
 
                     {
                         topRatedProperties.map(property =>
