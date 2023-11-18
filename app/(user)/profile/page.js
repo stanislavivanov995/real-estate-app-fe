@@ -12,14 +12,14 @@ export default function ProfilePage() {
   return (
     <DashboardLayout>
       <div className="flex flex-col gap-10 h-full w-full">
-        <div className="bg-indigo-800 w-full py-[9em] relative">
+        <div className="bg-indigo-800 w-full py-[7.5em] relative">
           <img
             src={person.img}
             alt="user"
-            className="rounded-full border-[6px] border-indigo-400 w-[14em] absolute right-[42.7%] mb-[-4em]"
+            className="rounded-full border-[6px] border-indigo-400 w-[14em] sticky mb-[-14em] mx-auto"
           />
         </div>
-        <div className="flex flex-col items-center gap-[8em] mt-[3em] mb-5">
+        <div className="flex flex-col items-center gap-[8em] mt-[5em] mb-5">
           <div className="flex flex-col gap-4">
             <div className="text-center mt-4">
               <h1 className="text-4xl font-bold">{person.name}</h1>
@@ -30,7 +30,7 @@ export default function ProfilePage() {
               </label>
               <textarea
                 id="bio"
-                className="border-2 border-indigo-500 rounded-md p-2 text-center resize-none h-[9em] w-[30em] mx-auto focus:outline-none focus:ring focus:border-blue-300"
+                className="border-2 border-indigo-500 rounded-md text-center text-xl resize-none h-[8em] w-[30em] max-sm:w-[16em] max-sm:h-[14em] mx-auto focus:outline-none focus:ring focus:border-blue-300"
                 placeholder="Write your bio..."
                 value={person.description}
                 readOnly
@@ -38,14 +38,16 @@ export default function ProfilePage() {
             </div>
           </div>
           <div>
-            <h1 className="text-xl font-medium mb-2">Properties for Rent</h1>
+            <h1 className="text-xl font-medium mb-2 max-sm:text-center">
+              Properties for Rent
+            </h1>
 
             <div
               id="default-carousel"
-              className="relative w-[36em] max-sm:w-[27em] h-[38em] p-10 bg-gray-800 rounded-lg"
+              className="relative w-[36em] max-sm:w-[20em] h-[40.5em] p-10 bg-gray-800 rounded-lg"
               data-carousel="slide"
             >
-              <div className="relative overflow-hidden rounded-lg h-[33em]">
+              <div className="relative overflow-hidden rounded-lg h-[35.5em] max-sm:mt-20 max-sm:h-[25em]">
                 {" "}
                 <div
                   data-carousel-item
@@ -58,7 +60,7 @@ export default function ProfilePage() {
                       alt="product image"
                     />
                   </a>
-                  <div className="px-5 pb-5">
+                  <div className="flex flex-col gap-5 mt-3 px-5 pb-5">
                     <a href="#">
                       <h5 className="text-xl font-semibold tracking-tight text-gray-900 text-white">
                         Apple Watch Series 7 GPS, Aluminium Case, Starlight
@@ -127,338 +129,6 @@ export default function ProfilePage() {
                       >
                         Visit
                       </a>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  data-carousel-item
-                  className="duration-700 ease-in-out z-20 absolute inset-0 transition-transform transform translate-x-0"
-                >
-                  <a href="#">
-                    <img
-                      className="p-8 rounded-t-lg"
-                      src="https://t4.ftcdn.net/jpg/05/48/63/19/360_F_548631983_fd74SAzPqnbH0SZTZNPuQXGTh6p6NoBL.jpg"
-                      alt="product image"
-                    />
-                  </a>
-                  <div className="px-5 pb-5">
-                    <a href="#">
-                      <h5 className="text-xl font-semibold tracking-tight text-gray-900 text-white">
-                        Apple Watch Series 7 GPS, Aluminium Case, Starlight
-                        Sport
-                      </h5>
-                    </a>
-                    <div className="flex items-center mt-2.5 mb-5">
-                      <div className="flex items-center space-x-1 rtl:space-x-reverse">
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-gray-200 text-gray-600"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                      </div>
-                      <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded bg-blue-200 text-blue-800 ms-3">
-                        5.0
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-3xl font-bold text-gray-900 text-white">
-                        $599
-                      </span>
-                      <a
-                        href="#"
-                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
-                      >
-                        Visit
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  data-carousel-item
-                  className="duration-700 ease-in-out z-20 absolute inset-0 transition-transform transform translate-x-0"
-                >
-                  <a href="#">
-                    <img
-                      className="p-8 rounded-t-lg"
-                      src="https://t4.ftcdn.net/jpg/05/48/63/19/360_F_548631983_fd74SAzPqnbH0SZTZNPuQXGTh6p6NoBL.jpg"
-                      alt="product image"
-                    />
-                  </a>
-                  <div className="px-5 pb-5">
-                    <a href="#">
-                      <h5 className="text-xl font-semibold tracking-tight text-gray-900 text-white">
-                        Apple Watch Series 7 GPS, Aluminium Case, Starlight
-                        Sport
-                      </h5>
-                    </a>
-                    <div className="flex items-center mt-2.5 mb-5">
-                      <div className="flex items-center space-x-1 rtl:space-x-reverse">
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-gray-200 text-gray-600"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                      </div>
-                      <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded bg-blue-200 text-blue-800 ms-3">
-                        5.0
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-3xl font-bold text-gray-900 text-white">
-                        $599
-                      </span>
-                      <a
-                        href="#"
-                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
-                      >
-                        Visit
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div
-                  data-carousel-item
-                  className="duration-700 ease-in-out z-20 absolute inset-0 transition-transform transform translate-x-0"
-                >
-                  <a href="#">
-                    <img
-                      className="p-8 rounded-t-lg"
-                      src="https://t4.ftcdn.net/jpg/05/48/63/19/360_F_548631983_fd74SAzPqnbH0SZTZNPuQXGTh6p6NoBL.jpg"
-                      alt="product image"
-                    />
-                  </a>
-                  <div className="px-5 pb-5">
-                    <a href="#">
-                      <h5 className="text-xl font-semibold tracking-tight text-gray-900 text-white">
-                        Apple Watch Series 7 GPS, Aluminium Case, Starlight
-                        Sport
-                      </h5>
-                    </a>
-                    <div className="flex items-center mt-2.5 mb-5">
-                      <div className="flex items-center space-x-1 rtl:space-x-reverse">
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-yellow-300"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                        <svg
-                          className="w-4 h-4 text-gray-200 text-gray-600"
-                          aria-hidden="true"
-                          xmlns="http://www.w3.org/2000/svg"
-                          fill="currentColor"
-                          viewBox="0 0 22 20"
-                        >
-                          <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                        </svg>
-                      </div>
-                      <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded bg-blue-200 text-blue-800 ms-3">
-                        5.0
-                      </span>
-                    </div>
-                    <div className="flex items-center justify-between">
-                      <span className="text-3xl font-bold text-gray-900 text-white">
-                        $599
-                      </span>
-                      <a
-                        href="#"
-                        className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
-                      >
-                        Visit
-                      </a>
-                    </div>
-                  </div>
-                  <div
-                    data-carousel-item
-                    className="duration-700 ease-in-out z-20 absolute inset-0 transition-transform transform translate-x-0"
-                  >
-                    <a href="#">
-                      <img
-                        className="p-8 rounded-t-lg"
-                        src="https://t4.ftcdn.net/jpg/05/48/63/19/360_F_548631983_fd74SAzPqnbH0SZTZNPuQXGTh6p6NoBL.jpg"
-                        alt="product image"
-                      />
-                    </a>
-                    <div className="px-5 pb-5">
-                      <a href="#">
-                        <h5 className="text-xl font-semibold tracking-tight text-gray-900 text-white">
-                          Apple Watch Series 7 GPS, Aluminium Case, Starlight
-                          Sport
-                        </h5>
-                      </a>
-                      <div className="flex items-center mt-2.5 mb-5">
-                        <div className="flex items-center space-x-1 rtl:space-x-reverse">
-                          <svg
-                            className="w-4 h-4 text-yellow-300"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 22 20"
-                          >
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                          </svg>
-                          <svg
-                            className="w-4 h-4 text-yellow-300"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 22 20"
-                          >
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                          </svg>
-                          <svg
-                            className="w-4 h-4 text-yellow-300"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 22 20"
-                          >
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                          </svg>
-                          <svg
-                            className="w-4 h-4 text-yellow-300"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 22 20"
-                          >
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                          </svg>
-                          <svg
-                            className="w-4 h-4 text-gray-200 text-gray-600"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor"
-                            viewBox="0 0 22 20"
-                          >
-                            <path d="M20.924 7.625a1.523 1.523 0 0 0-1.238-1.044l-5.051-.734-2.259-4.577a1.534 1.534 0 0 0-2.752 0L7.365 5.847l-5.051.734A1.535 1.535 0 0 0 1.463 9.2l3.656 3.563-.863 5.031a1.532 1.532 0 0 0 2.226 1.616L11 17.033l4.518 2.375a1.534 1.534 0 0 0 2.226-1.617l-.863-5.03L20.537 9.2a1.523 1.523 0 0 0 .387-1.575Z" />
-                          </svg>
-                        </div>
-                        <span className="bg-blue-100 text-blue-800 text-xs font-semibold px-2.5 py-0.5 rounded bg-blue-200 text-blue-800 ms-3">
-                          5.0
-                        </span>
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <span className="text-3xl font-bold text-gray-900 text-white">
-                          $599
-                        </span>
-                        <a
-                          href="#"
-                          className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-800"
-                        >
-                          Visit
-                        </a>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -492,13 +162,13 @@ export default function ProfilePage() {
                   aria-label="Slide 4"
                   data-carousel-slide-to="4"
                 ></button>
-                <button
+                {/* <button
                   type="button"
                   className="w-3 h-3 rounded-full"
                   aria-current="false"
                   aria-label="Slide 5"
                   data-carousel-slide-to="5"
-                ></button>
+                ></button> */}
               </div>
               <button
                 type="button"
