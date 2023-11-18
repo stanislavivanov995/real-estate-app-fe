@@ -47,9 +47,10 @@ export default function Sidebar() {
         className={
           isSidebarOn === true
             ? "fixed z-40 w-[20.5em] min-h-screen"
-            : "max-sm:hidden z-40 w-[34em] min-h-screen transition-transform -translate-x-[30em] max-lg:hidden sm:translate-x-0"
+            : "max-sm:hidden z-40 w-[34em] min-h-screen transition-transform -translate-x-[30em] max-lg:hidden sm:translate-x-0 left-0 top-0"
         }
         aria-label="Sidebar"
+        aria-hidden
       >
         <div className="h-full px-3 py-4 overflow-y-auto bg-indigo-300 dark:bg-gray-800">
           <div className="flex justify-between font-bold text-3xl text-gray-700 ml-2 mt-2 border-b border-gray-200 mb-5 pb-3">
@@ -98,9 +99,9 @@ export default function Sidebar() {
                 <span className="flex-1 ml-3 whitespace-nowrap">
                   My Estates
                 </span>
-                {/* <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
-                  Pro
-                </span> */}
+                <span className="inline-flex items-center justify-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-100 rounded-full dark:bg-gray-700 dark:text-gray-300">
+                  99+
+                </span>
               </Link>
             </li>
             <li>

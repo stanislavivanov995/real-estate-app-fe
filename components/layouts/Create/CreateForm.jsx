@@ -218,9 +218,9 @@ export default function CreateForm() {
               >
                 Price
               </label>
-              <div className="flex bg-gray-50 border border-gray-300 rounded-lg focus:bg-red-500">
-                <div className="relative w-full">
-                  <span className="absolute top-0 left-0 px-2.5 py-2 font-bold text-gray-900 text-md dark:text-white">
+              <div className="flex items-center bg-gray-50 border border-gray-300 rounded-lg focus:bg-red-500">
+                <div className="relative w-full p-2">
+                  <span className="absolute top-2 left-2 px-2.5 py-[0.4em] font-bold text-gray-900 text-md dark:text-white">
                     {selectedCurrency}
                   </span>
                   <Field
@@ -237,7 +237,7 @@ export default function CreateForm() {
                     name="currency"
                     id="currency"
                     value={selectedCurrency}
-                    className="rounded-lg bg-transparent"
+                    className="rounded-lg bg-transparent h-10"
                     onChange={(e) => setSelectedCurrency(e.target.value)}
                   >
                     <option

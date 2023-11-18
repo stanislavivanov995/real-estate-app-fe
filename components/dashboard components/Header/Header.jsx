@@ -7,7 +7,7 @@ export default function Header() {
   return (
     <Navbar fluid rounded className="shadow-lg w-full p-7">
       <div className="font-bold ml-5 max-lg:hidden">DASHBOARD</div>
-      <div className="hidden max-lg:block font-bold text-3xl text-gray-700 ml-10">
+      <div className="block lg:hidden font-bold text-3xl text-gray-700 ml-10">
         Reservio
       </div>
       <div className="flex md:order-2">
