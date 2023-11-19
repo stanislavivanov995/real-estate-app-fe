@@ -33,7 +33,7 @@ export default function CreateForm() {
 
   const [address, setAddress] = useState("");
   const [coordinates, setCoordinates] = useState({
-    lang: null,
+    lat: null,
     lng: null,
   });
 
@@ -41,9 +41,11 @@ export default function CreateForm() {
     const results = await geocodeByAddress(value);
     const ll = await getLatLng(results[0]);
     setAddress(value);
+    console.log(ll);
     setCoordinates(ll);
   };
 
+  const [showTooltip, setShowTooltip] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [fileStatus, setFileStatus] = useState(
     "Click to upload or drag and drop"
@@ -51,12 +53,26 @@ export default function CreateForm() {
 
   const handleFileInputChange = (e) => {
     const files = Array.from(e.target.files);
+    if (files.length + selectedFiles.length > 15) {
+      setShowTooltip(true);
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 3000);
+      return;
+    }
     setSelectedFiles([...selectedFiles, ...files]);
     setFileStatus("Files selected");
   };
 
   const handleFileDrop = (e) => {
     e.preventDefault();
+    if (selectedFiles.length === 15) {
+      setShowTooltip(true);
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 3000);
+      return;
+    }
     const files = Array.from(e.dataTransfer.files);
     setSelectedFiles([...selectedFiles, ...files]);
     setFileStatus("Files dropped");
@@ -86,24 +102,33 @@ export default function CreateForm() {
   };
 
   const validationSchema = Yup.object().shape({
-    // name: Yup.string().required(),
-    // location: Yup.string().required(),
-    // price: Yup.string().required(),
-    // category: Yup.string().required(),
+    name: Yup.string().required("Property Name is required"),
+    // location: Yup.string().required("Location is required"),
+    // price: Yup.number()
+    //   .required("Price is required")
+    //   .positive("Price must be positive"),
+    // category: Yup.string().required("Category is required"),
     // currency: Yup.string(),
-    // rooms: Yup.number().required(),
-    // description: Yup.string().required(),
-    // images: Yup.array().required(),
+    // rooms: Yup.number()
+    //   .required("Rooms count is required")
+    //   .positive("Rooms count must be positive"),
+    // description: Yup.string().required("Description is required"),
+    // images: Yup.array().min(1, "At least one image is required"),
   });
 
-  function handleFunction(data) {
+  function handleFunction(data, { resetForm }) {
     const formData = {
       ...data,
+      location: address,
+      lat: coordinates.lat,
+      lng: coordinates.lng,
       category: selectedCategory,
       currency: selectedCurrency,
+      images: selectedFiles.map((file) => URL.createObjectURL(file)),
     };
 
     console.log(JSON.stringify(formData, null, 2));
+    resetForm();
   }
 
   const getCategoryData = async () => {
@@ -328,6 +353,18 @@ export default function CreateForm() {
               />
             </div>
           </div>
+
+          {showTooltip && (
+            <div
+              id="tooltip-click"
+              role="tooltip"
+              className="text-center z-10 bg-red-500 block px-3 py-1.5 text-sm font-medium text-white rounded-lg shadow-sm"
+            >
+              Maximum images are 15!
+              <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+          )}
+
           <div className="w-full">
             <label
               htmlFor="images"
@@ -395,6 +432,7 @@ export default function CreateForm() {
                 className="hidden"
                 multiple
                 onChange={handleFileInputChange}
+                disabled={selectedFiles.length === 15}
               />
             </label>
           </div>
