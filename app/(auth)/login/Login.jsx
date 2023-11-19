@@ -6,7 +6,7 @@ export default function Login() {
   return (
     <PublicLayout>
       <div className="flex justify-center mt-[10px] sm:mt-[5em]">
-        <div className="w-[520px] sm:h-[620px] h-[700px] bg-slate-50 flex-col justify-start items-center inline-flex shadow-2xl sm:rounded-tl-[3em] sm:rounded-bl-[3em]">
+        <div className="w-[520px] sm:h-[620px] h-[700px] bg-slate-50 flex-col justify-start items-center inline-flex shadow-2xl max-lg:rounded-[3em] sm:rounded-tl-[3em] sm:rounded-bl-[3em]">
           <div className="flex flex-col justify-center gap-3 my-[40px] sm:my-[60px]">
             <div className="flex flex-col align-middle justify-center text-center sm:text-left">
               <h1 className="sm:text-[35px] lg:text-[25px] text-[25px] font-bold leading-normal">

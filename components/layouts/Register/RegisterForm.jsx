@@ -14,7 +14,6 @@ const initialValues = {
   toggle: false,
 };
 
-
 const validationSchema = Yup.object().shape({
   firstName: Yup.string()
     .required("First Name is required!")
@@ -44,7 +43,6 @@ function handleFunction(data) {
   sendPostRequest(formData);
 }
 
-
 const sendPostRequest = async (data) => {
   try {
     const response = await fetch("http://localhost:8000/api/register", {
@@ -65,7 +63,6 @@ const sendPostRequest = async (data) => {
   }
 };
 
-
 export default function RegisterForm() {
   return (
     <Formik
@@ -74,12 +71,12 @@ export default function RegisterForm() {
       validationSchema={validationSchema}
     >
       <Form className="flex flex-col gap-[10px] items-center">
-        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
+        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-300  border-[#8098F980] p-2 rounded-lg w-[300px]">
           <span>
             <Image src="/person.png" alt="person" width={23} height={23} />
           </span>
           <Field
-            className="indent-2 outline-0 bg-transparent"
+            className="border-0 focus:border-0 focus:ring-0 bg-transparent"
             type="text"
             name="firstName"
             id="firstName"
@@ -91,12 +88,12 @@ export default function RegisterForm() {
           component="span"
           className=" text-red-600 text-[14px]"
         />
-        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
+        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-300  border-[#8098F980] p-2 rounded-lg w-[300px]">
           <span>
             <Image src="/person.png" alt="person" width={23} height={23} />
           </span>
           <Field
-            className="indent-2 outline-0 bg-transparent"
+            className="border-0 focus:border-0 focus:ring-0 bg-transparent"
             type="text"
             name="lastName"
             id="lastName"
@@ -108,12 +105,12 @@ export default function RegisterForm() {
           component="span"
           className=" text-red-600 text-[14px]"
         />
-        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
+        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-300 border-[#8098F980] p-2 rounded-lg w-[300px]">
           <span>
             <Image src="/envelope.png" alt="envelope" width={23} height={23} />
           </span>
           <Field
-            className="indent-2 outline-0 bg-transparent"
+            className="border-0 focus:border-0 focus:ring-0 bg-transparent"
             type="text"
             name="email"
             id="email"
@@ -125,7 +122,7 @@ export default function RegisterForm() {
           component="span"
           className="text-red-600 text-[14px]"
         />
-        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
+        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-300  border-[#8098F980] p-2 rounded-lg w-[300px]">
           <span>
             <Image
               src="/shield-slash.png"
@@ -135,7 +132,7 @@ export default function RegisterForm() {
             />
           </span>
           <Field
-            className="indent-2 outline-0 bg-transparent"
+            className="border-0 focus:border-0 focus:ring-0 bg-transparent"
             type="password"
             name="password"
             id="password"
@@ -147,7 +144,7 @@ export default function RegisterForm() {
           component="span"
           className=" text-red-600 text-[14px]"
         />
-        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-400 bg-opacity-10 border-[#8098F980] p-2 rounded-lg w-[300px]">
+        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-300 border-[#8098F980] p-2 rounded-lg w-[300px]">
           <span>
             <Image
               src="/shield-slash.png"
@@ -157,7 +154,7 @@ export default function RegisterForm() {
             />
           </span>
           <Field
-            className="indent-2 outline-0 bg-transparent"
+            className="border-0 focus:border-0 focus:ring-0 bg-transparent"
             type="password"
             name="confirmPassword"
             id="confirmPassword"
