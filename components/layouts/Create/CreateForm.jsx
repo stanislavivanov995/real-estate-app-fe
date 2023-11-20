@@ -33,7 +33,7 @@ export default function CreateForm() {
 
   const [address, setAddress] = useState("");
   const [coordinates, setCoordinates] = useState({
-    lang: null,
+    lat: null,
     lng: null,
   });
 
@@ -41,9 +41,11 @@ export default function CreateForm() {
     const results = await geocodeByAddress(value);
     const ll = await getLatLng(results[0]);
     setAddress(value);
+    console.log(ll);
     setCoordinates(ll);
   };
 
+  const [showTooltip, setShowTooltip] = useState(false);
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [fileStatus, setFileStatus] = useState(
     "Click to upload or drag and drop"
@@ -51,12 +53,26 @@ export default function CreateForm() {
 
   const handleFileInputChange = (e) => {
     const files = Array.from(e.target.files);
+    if (files.length + selectedFiles.length > 15) {
+      setShowTooltip(true);
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 3000);
+      return;
+    }
     setSelectedFiles([...selectedFiles, ...files]);
     setFileStatus("Files selected");
   };
 
   const handleFileDrop = (e) => {
     e.preventDefault();
+    if (selectedFiles.length === 15) {
+      setShowTooltip(true);
+      setTimeout(() => {
+        setShowTooltip(false);
+      }, 3000);
+      return;
+    }
     const files = Array.from(e.dataTransfer.files);
     setSelectedFiles([...selectedFiles, ...files]);
     setFileStatus("Files dropped");
@@ -86,26 +102,34 @@ export default function CreateForm() {
   };
 
   const validationSchema = Yup.object().shape({
-    // name: Yup.string().required(),
-    // location: Yup.string().required(),
-    // price: Yup.string().required(),
-    // category: Yup.string().required(),
+    name: Yup.string().required("Property Name is required"),
+    // location: Yup.string().required("Location is required"),
+    // price: Yup.number()
+    //   .required("Price is required")
+    //   .positive("Price must be positive"),
+    // category: Yup.string().required("Category is required"),
     // currency: Yup.string(),
-    // rooms: Yup.number().required(),
-    // description: Yup.string().required(),
-    // images: Yup.array().required(),
+    // rooms: Yup.number()
+    //   .required("Rooms count is required")
+    //   .positive("Rooms count must be positive"),
+    // description: Yup.string().required("Description is required"),
+    // images: Yup.array().min(1, "At least one image is required"),
   });
 
-  function handleFunction(data) {
+  function handleFunction(data, { resetForm }) {
     const formData = {
       ...data,
+      location: address,
+      lat: coordinates.lat,
+      lng: coordinates.lng,
       category: selectedCategory,
-      currency: selectedCurrency, 
+      currency: selectedCurrency,
+      images: selectedFiles.map((file) => URL.createObjectURL(file)),
     };
-  
+
     console.log(JSON.stringify(formData, null, 2));
+    resetForm();
   }
-  
 
   const getCategoryData = async () => {
     try {
@@ -113,7 +137,7 @@ export default function CreateForm() {
       if (!response.ok) {
         throw new Error(`Error: ${response.status}`);
       }
-  
+
       const data = await response.json();
       return data;
     } catch (error) {
@@ -219,9 +243,9 @@ export default function CreateForm() {
               >
                 Price
               </label>
-              <div className="flex bg-gray-50 border border-gray-300 rounded-lg focus:bg-red-500">
-                <div className="relative w-full">
-                  <span className="absolute top-0 left-0 px-2.5 py-2 font-bold text-gray-900 text-md dark:text-white">
+              <div className="flex items-center bg-gray-50 border border-gray-300 rounded-lg focus:bg-red-500">
+                <div className="relative w-full p-2">
+                  <span className="absolute top-2 left-2 px-2.5 py-[0.4em] font-bold text-gray-900 text-md dark:text-white">
                     {selectedCurrency}
                   </span>
                   <Field
@@ -238,7 +262,7 @@ export default function CreateForm() {
                     name="currency"
                     id="currency"
                     value={selectedCurrency}
-                    className="rounded-lg bg-transparent"
+                    className="rounded-lg bg-transparent h-10"
                     onChange={(e) => setSelectedCurrency(e.target.value)}
                   >
                     <option
@@ -283,19 +307,19 @@ export default function CreateForm() {
                 Category
               </label>
               <Field
-              as="select"
-              name="category"
-              id="category"
-              value={selectedCategory}
-              onChange={handleCategoryChange}
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-            >
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </Field>
+                as="select"
+                name="category"
+                id="category"
+                value={selectedCategory}
+                onChange={handleCategoryChange}
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              >
+                {categories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </Field>
             </div>
             <div className="w-full">
               <label
@@ -329,10 +353,22 @@ export default function CreateForm() {
               />
             </div>
           </div>
+
+          {showTooltip && (
+            <div
+              id="tooltip-click"
+              role="tooltip"
+              className="text-center z-10 bg-red-500 block px-3 py-1.5 text-sm font-medium text-white rounded-lg shadow-sm"
+            >
+              Maximum images are 15!
+              <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+          )}
+
           <div className="w-full">
             <label
               htmlFor="images"
-              className="flex flex-col items-center justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover-bg-gray-100 dark:border-gray-600 dark:hover-border-gray-500 dark:hover-bg-gray-600"
+              className="flex flex-col items-center max-md:max-w-[18em] justify-center w-full h-auto border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover-bg-gray-100 dark:border-gray-600 dark:hover-border-gray-500 dark:hover-bg-gray-600"
               onDrop={handleFileDrop}
               onDragOver={handleDragOver}
             >
@@ -396,6 +432,7 @@ export default function CreateForm() {
                 className="hidden"
                 multiple
                 onChange={handleFileInputChange}
+                disabled={selectedFiles.length === 15}
               />
             </label>
           </div>

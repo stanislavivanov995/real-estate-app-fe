@@ -18,6 +18,11 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         ></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOQd7UoVJHt28wLiHMD0ZY0S_AiONShyo&libraries=places"></script>
+        <link
+          href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.css"
+          rel="stylesheet"
+        />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.1.1/flowbite.min.js"></script>
       </head>
       <body className={inter.className}>{children}</body>
     </html>
