@@ -7,9 +7,8 @@ export default function PublicNavLinks() {
 
     const publicNavLinks = [
         {href: '/', name: 'Home'},
-        {href: '/public/faq', name: 'FAQ'},
-        {href: '/public/about', name: 'About'},
-        {href: '/public/contacts', name: 'Contacts'},
+        {href: '/properties', name: 'Properties'},
+        {href: '/popular', name: 'Popular'},
     ];
 
     return (
