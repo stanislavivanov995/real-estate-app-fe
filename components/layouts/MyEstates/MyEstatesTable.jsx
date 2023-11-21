@@ -1,8 +1,8 @@
 import Link from "next/link.js";
 export default function MyEstatesTable({ entries }) {
   return (
-    <div class="relative overflow-x-auto shadow-md sm:rounded-lg sm:w-[650px] md:w-[700px] 2xl:w-[1300px] lg:w-[750px] lg:mx-5 w-[400px]">
-      <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
           <tr>
             <th scope="col" class="px-6 py-3">

@@ -7,15 +7,16 @@ export default function Pagination({ hasNextPage, hasPrevPage }) {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  const page = searchParams.get("page") ?? "1";
-  const per_page = searchParams.get("per_page") ?? "6";
+  const page = Number(searchParams.get("page")) || 1;
+  const per_page = Number(searchParams.get("per_page")) || 6;
 
-  const availablePages = Math.ceil(10 / Number(per_page));
+  const totalItems = 100; 
+  const availablePages = Math.ceil(totalItems / Number(per_page));
 
   // Check and redirect if user change page url manually
   useEffect(() => {
     if (Number(page) < 1 || Number(page) > availablePages) {
-      router.push(`/admin/estates/my-estates/?page=1&per_page=${per_page}`);
+      router.push(`/admin/estates/my-estates?page=${page}&per_page=${per_page}`);
     }
   }, [page]);
 

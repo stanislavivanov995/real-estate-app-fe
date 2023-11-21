@@ -122,7 +122,7 @@ export default function MyEstates({ searchParams }) {
 
   return (
     <DashboardLayout>
-      <section className=" mt-[2em] gap-[8em] flex flex-col items-center justify-between h-[50em]">
+      <section className=" mt-[2em] gap-[8em] flex flex-col items-center justify-center h-full">
         <Suspense fallback={<Loading />}>
           <MyEstatesTable entries={entries} />
         </Suspense>
