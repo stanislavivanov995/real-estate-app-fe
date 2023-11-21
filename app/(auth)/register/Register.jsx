@@ -3,16 +3,10 @@ import RegisterForm from "@/components/layouts/Register/RegisterForm";
 import Image from "next/image";
 
 export default function Register() {
-  // TODO: Register form must have the following inputs + validations:
-  //  1. First & Last names
-  //  2. Email
-  //  3. Password
-  //  4. Re-password
-  //  5. Checkbox for accepting terms
   return (
     <PublicLayout>
-      <div className="flex justify-center m-auto mt-[3em] rounded-[3em] w-7/12 rounded-[3em] max-xl:w-4/12">
-        <div className="flex flex-col max-sm:ml-[1em] justify-center w-[650px] h-[800px] shadow-2xl items-center pl-[2em] pr-[2em] rounded-tl-[3em] rounded-bl-[3em]">
+      <div className="flex justify-center m-auto mt-[3em] rounded-[3em] w-7/12 max-xl:w-5/12">
+        <div className="flex flex-col max-sm:ml-[1em] justify-center w-[650px] h-[800px] max-xl:rounded-[3em] max-xl:h-[670px] shadow-2xl items-center pl-[2em] pr-[2em] rounded-tl-[3em] rounded-bl-[3em]">
           <div className="flex flex-col">
             <h1 className="font-bold text-[#09090B] text-3xl">
               Create your account
@@ -24,7 +18,7 @@ export default function Register() {
           <RegisterForm />
         </div>
 
-        <div className="hidden w-[650px] h-[800px] bg-[#343859] rounded-tr-[3em] rounded-br-[3em] xl:flex">
+        <div className="max-xl:hidden xl:flex w-[650px] h-[800px] bg-[#343859] rounded-tr-[3em] rounded-br-[3em]">
           <div className="flex flex-col items-center justify-center gap-[2em] mx-auto pl-[2em] p-[2em]">
             <Image
               src="/register.png"

@@ -28,23 +28,23 @@ export default function LoginForm() {
       onSubmit={handleFunction}
       validationSchema={validationSchema}
     >
-      <Form className=" mt-[25px] items-center flex flex-col w-[450px]">
-        <div className="w-[350px] sm:w-[450px] mb-4 h-10 bg-indigo-400 bg-opacity-10 rounded-[10px] border-2 border-indigo-400 flex justify-start text-lg items-center pl-2 gap-2.5">
+      <Form className="mt-[25px] items-center flex flex-col w-[450px]">
+        <div className="w-[350px] sm:w-[450px] mb-4 h-10 bg-indigo-300 rounded-[10px] flex justify-start text-md items-center pl-2.5 gap-3">
           <Image src={"/email.png"} alt="password" width={20} height={20} />
           <Field
             placeholder="Email"
             name="email"
             id="email"
-            className="bg-transparent outline-none text-[15px]"
+            className="outline-0 focus:border-0 focus:ring-0 bg-transparent"
           />
         </div>
         <ErrorMessage
           name="email"
           component="span"
-          className=" text-red-600 mb-3 text-[12px]"
+          className="text-red-600 mb-3 text-[12px]"
         />
-        <div className="w-[350px] sm:w-[450px] mb-4 h-10 bg-indigo-400 bg-opacity-10 rounded-[10px] border-2 border-indigo-400 flex justify-between text-lg items-center pl-2 gap-2.5">
-          <div className=" flex gap-2">
+        <div className="w-[350px] sm:w-[450px] mb-4 h-10 bg-indigo-300 rounded-[10px] flex justify-between text-md items-center">
+          <div className="flex items-center pl-2.5">
             <Image
               src={"/shield-slash.png"}
               alt="password"
@@ -56,19 +56,19 @@ export default function LoginForm() {
               type="password"
               name="password"
               id="password"
-              className="bg-transparent outline-none w-full text-[15px]"
+              className="border-0 focus:border-0 focus:ring-0 bg-transparent"
             />
           </div>
-          <div className="mr-[10px] opacity-20">
+          <div className="mr-[15px] opacity-30">
             <i className="fa-solid fa-eye-slash"></i>
           </div>
         </div>
         <ErrorMessage
           name="password"
           component="span"
-          className=" text-red-600 mb-3 text-[12px]"
+          className="text-red-600 mb-3 text-[12px]"
         />
-        <div className=" flex sm:flex-row flex-col sm:gap-[11em] gap-3 mb-[25px] mt-[1em]">
+        <div className="flex sm:flex-row flex-col sm:gap-[11em] justify-between max-sm:gap-3 mb-[25px] mt-[1em]">
           <div className="flex items-center gap-2">
             <Field
               type="checkbox"

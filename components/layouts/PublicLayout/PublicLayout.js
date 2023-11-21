@@ -1,5 +1,6 @@
 import PublicNavLinks from "@/components/layouts/PublicLayout/PublicNavLinks";
 import Link from "next/link";
+import Footer from "@/components/shared/Footer";
 
 export default function PublicLayout({children}) {
 
@@ -27,6 +28,7 @@ export default function PublicLayout({children}) {
 
             </header>
             {children}
+            <Footer/>
         </>
     );
 }
