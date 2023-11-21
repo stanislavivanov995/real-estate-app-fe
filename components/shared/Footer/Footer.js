@@ -1,9 +1,8 @@
 import Link from "next/link";
 
 export default function Footer() {
-    // TODO:
     return (
-        <footer className={'text-sky-50 bg-white border-t px-10 pt-5 shadow-md bg-gradient-to-r from-blue-500 to-sky-500'}>
+        <footer className={'text-sky-50 bg-white border-t px-10 pt-5 shadow-md bg-gradient-to-r from-blue-700 to-sky-700'}>
 
             <h4 className={'p-5 text-center font-bold text-4xl text-white'}>
                 Everything you need in one booking app!
