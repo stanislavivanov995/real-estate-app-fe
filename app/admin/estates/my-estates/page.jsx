@@ -15,7 +15,7 @@ let estatesData = [
   },
   {
     id: 2,
-    propertyName: "HillHouse Plovdiv	",
+    propertyName: "HillHouse Plovdiv",
     location: "Plovdiv, Bulgaria",
     category: "House",
     currency: "€",
