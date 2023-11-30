@@ -355,7 +355,7 @@ export default function CreateForm({ categoryData }) {
                     <option
                       value="€"
                       className={
-                        selectedCurrency === "€"
+                        selectedCurrency === "EUR"
                           ? "bg-indigo-300"
                           : "bg-gray-200"
                       }
@@ -365,7 +365,7 @@ export default function CreateForm({ categoryData }) {
                     <option
                       value="$"
                       className={
-                        selectedCurrency === "$"
+                        selectedCurrency === "USD"
                           ? "bg-indigo-300"
                           : "bg-gray-200"
                       }
