@@ -15,7 +15,7 @@ import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
 
 export default function CreateForm({ categoryData }) {
-  const [selectedCurrency, setSelectedCurrency] = useState("lv");
+  const [selectedCurrency, setSelectedCurrency] = useState("BGN");
   const [selectedCategory, setSelectedCategory] = useState("1");
   const [categories, setCategories] = useState([]);
 
@@ -120,7 +120,7 @@ export default function CreateForm({ categoryData }) {
     location: "",
     price: 0,
     category: "",
-    currency: "lv",
+    currency: "BGN",
     rooms: 1,
     description: "",
     images: [],
@@ -144,7 +144,7 @@ export default function CreateForm({ categoryData }) {
   async function handleFunction(data, { resetForm }) {
     const formData = {
       ...data,
-      userId: "2ad213dsa-321dsa13",
+      userId: "2",
       location: address,
       arriveHour: arriveHour,
       leaveHour: leaveHour,
@@ -160,13 +160,15 @@ export default function CreateForm({ categoryData }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
         },
+        withCredentials: true,
         body: JSON.stringify(formData),
         // body: JSON.stringify(formData, null, 2),
       });
       resetForm();
       router.push("/");
-      console.log("successfully created");
+      console.log("estate posted");
     } catch (error) {
       console.log(error);
     }
@@ -319,10 +321,10 @@ export default function CreateForm({ categoryData }) {
                     {selectedCurrency}
                   </span>
                   <Field
-                    type="text"
+                    type="number"
                     name="price"
                     id="price"
-                    className="bg-gray-50 pl-8 outline-none text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full block p-[0.8em] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 pl-14 outline-none text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full block p-[0.8em] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="0.00"
                   />
                   <ErrorMessage
@@ -341,9 +343,9 @@ export default function CreateForm({ categoryData }) {
                     onChange={(e) => setSelectedCurrency(e.target.value)}
                   >
                     <option
-                      value="lv"
+                      value="BGN"
                       className={
-                        selectedCurrency === "lv"
+                        selectedCurrency === "BGN"
                           ? "bg-indigo-300"
                           : "bg-gray-200"
                       }
