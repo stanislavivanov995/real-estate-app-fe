@@ -1,4 +1,8 @@
 import DashboardLayout from "@/components/layouts/DashboardLayout";
+import Image from "next/image";
+
+import { Formik, Field, Form, ErrorMessage } from "formik";
+import * as Yup from "yup";
 
 export default function ProfilePage() {
   const person = {
@@ -13,14 +17,42 @@ export default function ProfilePage() {
     <DashboardLayout>
       <div className="flex flex-col gap-10 h-full w-full">
         <div className="bg-indigo-800 w-full py-[7.5em] relative">
-          <img
-            src={person.img}
-            alt="user"
-            className="rounded-full border-[6px] border-indigo-400 w-[14em] sticky mb-[-14em] mx-auto"
-          />
+          <div className="flex items-center justify-center mx-auto w-[14em] mb-[-14em]">
+            <label
+              htmlFor="dropzone-file"
+              className="flex flex-col items-center justify-center w-full h-56 rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100"
+            >
+              <Image
+                src={person.img}
+                alt="user"
+                width={200}
+                height={200}
+                className="rounded-full w-[14em] sticky mb-[-6em] mx-auto"
+                style={{ textAlign: "center" }}
+              />
+              <div className="flex flex-col items-center justify-center pt-5 pb-6">
+                <svg
+                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 20 16"
+                >
+                  <path
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth="2"
+                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                  />
+                </svg>
+              </div>
+              <input id="dropzone-file" type="file" className="hidden" />
+            </label>
+          </div>
         </div>
         <div className="flex flex-col items-center gap-[8em] mt-[5em] mb-5">
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-5">
             <div className="text-center mt-4">
               <h1 className="text-4xl font-bold">{person.name}</h1>
             </div>
@@ -36,6 +68,43 @@ export default function ProfilePage() {
                 readOnly
               />
             </div>
+
+            <form className="mt-[3em]">
+              <label
+                for="phone-input"
+                class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+              >
+                Phone number:
+              </label>
+              <div class="relative">
+                <div class="absolute inset-y-0 start-0 top-0 flex items-center ps-3.5 pointer-events-none">
+                  <svg
+                    class="w-4 h-4 text-gray-500 dark:text-gray-400"
+                    aria-hidden="true"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="currentColor"
+                    viewBox="0 0 19 18"
+                  >
+                    <path d="M18 13.446a3.02 3.02 0 0 0-.946-1.985l-1.4-1.4a3.054 3.054 0 0 0-4.218 0l-.7.7a.983.983 0 0 1-1.39 0l-2.1-2.1a.983.983 0 0 1 0-1.389l.7-.7a2.98 2.98 0 0 0 0-4.217l-1.4-1.4a2.824 2.824 0 0 0-4.218 0c-3.619 3.619-3 8.229 1.752 12.979C6.785 16.639 9.45 18 11.912 18a7.175 7.175 0 0 0 5.139-2.325A2.9 2.9 0 0 0 18 13.446Z" />
+                  </svg>
+                </div>
+                <input
+                  type="text"
+                  id="phone-input"
+                  aria-describedby="helper-text-explanation"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+                  placeholder="123-456-7890"
+                  required
+                />
+              </div>
+              <p
+                id="helper-text-explanation"
+                class="mt-2 text-sm text-gray-500 dark:text-gray-400"
+              >
+                Select a phone number that matches the format.
+              </p>
+            </form>
           </div>
           <div>
             <h1 className="text-xl font-medium mb-2 max-sm:text-center">
