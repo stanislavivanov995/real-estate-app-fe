@@ -8,7 +8,7 @@ export default function ProfilePage() {
   let person = {
     name: "Ivan Petrov",
     bio: "",
-    img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    img: "",
     properties: [],
   };
 
@@ -60,7 +60,7 @@ export default function ProfilePage() {
               </label>
               <textarea
                 id="bio"
-                className="border-2 border-indigo-500 rounded-md text-center text-xl resize-none h-[7em] w-[30em] max-sm:w-[16em] max-sm:h-[14em] mx-auto focus:outline-none focus:ring focus:border-blue-300"
+                className="border-2 border-indigo-500 rounded-md text-xl resize-none h-[7em] w-[30em] max-sm:w-[16em] max-sm:h-[14em] mx-auto focus:outline-none focus:ring focus:border-blue-300"
                 placeholder="Write your bio..."
               />
             </div>
