@@ -5,73 +5,69 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 export default function ProfilePage() {
-  const person = {
+  let person = {
     name: "Ivan Petrov",
-    description:
-      "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ad perferendis assumenda vel aut fuga laudantium exercitationem nihil, nesciunt, doloribus dolor laboriosam aperiam eum debitis maxime architecto repellendus, et quo aspernatur.",
-    img: "https://images.unsplash.com/photo-1633332755192-727a05c4013d?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-    properties: ["Property 1", "Property 2", "Property 3"],
+    bio: "",
+    img: "https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    properties: [],
   };
 
   return (
     <DashboardLayout>
       <div className="flex flex-col gap-10 h-full w-full">
-        <div className="bg-indigo-800 w-full py-[7.5em] relative">
-          <div className="flex items-center justify-center mx-auto w-[14em] mb-[-14em]">
+        <div className="bg-indigo-800 w-full py-[8.3em] relative">
+          <div className="flex items-center justify-center mx-auto mb-[-14em]">
             <label
-              htmlFor="dropzone-file"
-              className="flex flex-col items-center justify-center w-full h-56 rounded-full cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100"
+              htmlfor="dropzone-file"
+              className="flex flex-col items-center justify-center h-56 rounded-full cursor-pointer bg-gray-100"
             >
-              <Image
-                src={person.img}
-                alt="user"
-                width={200}
-                height={200}
-                className="rounded-full w-[14em] sticky mb-[-6em] mx-auto"
-                style={{ textAlign: "center" }}
-              />
-              <div className="flex flex-col items-center justify-center pt-5 pb-6">
-                <svg
-                  className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 16"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                  />
-                </svg>
-              </div>
+              {person.img ? (
+                <Image
+                  src={person.img}
+                  alt="user"
+                  width={200}
+                  height={200}
+                  className="rounded-full w-[16em] h-[17.5em] sticky border-[5px] border-indigo-400 mb-[-5.7em] mx-auto"
+                  style={{ textAlign: "center" }}
+                />
+              ) : (
+                <div className="flex justify-center align-center w-[14em]">
+                  <i className="fa-solid fa-user fa-8x mt-[0.6em]"></i>
+                </div>
+              )}
+              <div className="flex flex-col items-center justify-center"></div>
+              {person.img ? (
+                <p className="mt-[6em] font-bold text-blue-500">
+                  change your photo
+                </p>
+              ) : (
+                <p className="mt-[4em] font-bold text-blue-500">
+                  change your photo
+                </p>
+              )}
               <input id="dropzone-file" type="file" className="hidden" />
             </label>
           </div>
         </div>
         <div className="flex flex-col items-center gap-[8em] mt-[5em] mb-5">
           <div className="flex flex-col gap-5">
-            <div className="text-center mt-4">
+            <div className="text-center mt-10">
               <h1 className="text-4xl font-bold">{person.name}</h1>
             </div>
             <div className="text-center">
-              <label htmlFor="bio" className="text-lg text-gray-500 mb-1 block">
+              <label htmlfor="bio" className="text-lg text-gray-500 mb-1 block">
                 Bio
               </label>
               <textarea
                 id="bio"
-                className="border-2 border-indigo-500 rounded-md text-center text-xl resize-none h-[8em] w-[30em] max-sm:w-[16em] max-sm:h-[14em] mx-auto focus:outline-none focus:ring focus:border-blue-300"
+                className="border-2 border-indigo-500 rounded-md text-center text-xl resize-none h-[7em] w-[30em] max-sm:w-[16em] max-sm:h-[14em] mx-auto focus:outline-none focus:ring focus:border-blue-300"
                 placeholder="Write your bio..."
-                value={person.description}
-                readOnly
               />
             </div>
 
             <form className="mt-[3em]">
               <label
-                for="phone-input"
+                htmlfor="phone-input"
                 class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
               >
                 Phone number:
