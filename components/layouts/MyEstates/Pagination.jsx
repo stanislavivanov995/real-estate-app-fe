@@ -10,13 +10,15 @@ export default function Pagination({ hasNextPage, hasPrevPage }) {
   const page = Number(searchParams.get("page")) || 1;
   const per_page = Number(searchParams.get("per_page")) || 6;
 
-  const totalItems = 100; 
+  const totalItems = 100;
   const availablePages = Math.ceil(totalItems / Number(per_page));
 
   // Check and redirect if user change page url manually
   useEffect(() => {
     if (Number(page) < 1 || Number(page) > availablePages) {
-      router.push(`/admin/estates/my-estates?page=${page}&per_page=${per_page}`);
+      router.push(
+        `/admin/estates/my-estates?page=${page}&per_page=${per_page}`
+      );
     }
   }, [page]);
 
@@ -54,17 +56,17 @@ export default function Pagination({ hasNextPage, hasPrevPage }) {
           >
             <path
               stroke="currentColor"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M5 1 1 5l4 4"
             />
           </svg>
         </button>
         {/* <li>
-            <span class="sr-only">Previous</span>
+            <span className="sr-only">Previous</span>
             <svg
-              class="w-3 h-3 rtl:rotate-180"
+              className="w-3 h-3 rtl:rotate-180"
               aria-hidden="true"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -83,7 +85,7 @@ export default function Pagination({ hasNextPage, hasPrevPage }) {
         <li>
           <a
             href="#"
-            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             1
           </a>
@@ -92,7 +94,7 @@ export default function Pagination({ hasNextPage, hasPrevPage }) {
         <li>
           <a
             href="#"
-            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             2
           </a>
@@ -101,7 +103,7 @@ export default function Pagination({ hasNextPage, hasPrevPage }) {
           <a
             href="#"
             aria-current="page"
-            // class="z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+            // className="z-10 flex items-center justify-center px-4 h-10 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
             className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             3
@@ -110,7 +112,7 @@ export default function Pagination({ hasNextPage, hasPrevPage }) {
         <li>
           <a
             href="#"
-            class="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            className="flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           >
             4
           </a>
@@ -140,9 +142,9 @@ export default function Pagination({ hasNextPage, hasPrevPage }) {
             >
               <path
                 stroke="currentColor"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
                 d="m1 9 4-4-4-4"
               />
             </svg>

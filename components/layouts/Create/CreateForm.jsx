@@ -448,7 +448,7 @@ export default function CreateForm({ categoryData }) {
               className="text-center z-10 bg-red-500 block px-3 py-1.5 text-sm font-medium text-white rounded-lg shadow-sm"
             >
               Maximum images are 15!
-              <div class="tooltip-arrow" data-popper-arrow></div>
+              <div className="tooltip-arrow" data-popper-arrow></div>
             </div>
           )}
 
