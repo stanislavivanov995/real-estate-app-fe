@@ -3,16 +3,53 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation.js";
 
 import PlacesAutocomplete, {
   geocodeByAddress,
   getLatLng,
 } from "react-places-autocomplete";
 
-export default function CreateForm() {
-  const [selectedCurrency, setSelectedCurrency] = useState("lv");
+import TimePicker from "react-time-picker";
+import "react-time-picker/dist/TimePicker.css";
+import "react-clock/dist/Clock.css";
+
+export default function CreateForm({ categoryData }) {
+  const [selectedCurrency, setSelectedCurrency] = useState("BGN");
   const [selectedCategory, setSelectedCategory] = useState("1");
   const [categories, setCategories] = useState([]);
+
+  const [arriveHour, setArriveHour] = useState("10:00");
+  const [leaveHour, setLeaveHour] = useState("10:00");
+
+  const [address, setAddress] = useState("");
+  const [coordinates, setCoordinates] = useState({
+    lat: null,
+    lng: null,
+  });
+
+  const [showTooltip, setShowTooltip] = useState(false);
+  const [selectedFiles, setSelectedFiles] = useState([]);
+  const [fileStatus, setFileStatus] = useState(
+    "Click to upload or drag and drop"
+  );
+
+  const router = useRouter();
+
+  const getCategoryData = async () => {
+    try {
+      const response = await fetch("http://localhost:8000/api/list-categories");
+      if (!response.ok) {
+        throw new Error(`Error: ${response.status}`);
+      }
+
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error:", error.message);
+      return [];
+    }
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -31,12 +68,6 @@ export default function CreateForm() {
     setSelectedCategory(e.target.value);
   };
 
-  const [address, setAddress] = useState("");
-  const [coordinates, setCoordinates] = useState({
-    lat: null,
-    lng: null,
-  });
-
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const ll = await getLatLng(results[0]);
@@ -44,12 +75,6 @@ export default function CreateForm() {
     console.log(ll);
     setCoordinates(ll);
   };
-
-  const [showTooltip, setShowTooltip] = useState(false);
-  const [selectedFiles, setSelectedFiles] = useState([]);
-  const [fileStatus, setFileStatus] = useState(
-    "Click to upload or drag and drop"
-  );
 
   const handleFileInputChange = (e) => {
     const files = Array.from(e.target.files);
@@ -95,14 +120,14 @@ export default function CreateForm() {
     location: "",
     price: 0,
     category: "",
-    currency: "lv",
+    currency: "BGN",
     rooms: 1,
     description: "",
     images: [],
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Property Name is required"),
+    // name: Yup.string().required("Property Name is required"),
     // location: Yup.string().required("Location is required"),
     // price: Yup.number()
     //   .required("Price is required")
@@ -116,35 +141,38 @@ export default function CreateForm() {
     // images: Yup.array().min(1, "At least one image is required"),
   });
 
-  function handleFunction(data, { resetForm }) {
+  async function handleFunction(data, { resetForm }) {
     const formData = {
       ...data,
+      userId: "2",
       location: address,
-      lat: coordinates.lat,
-      lng: coordinates.lng,
+      arriveHour: arriveHour,
+      leaveHour: leaveHour,
+      latitude: coordinates.lat,
+      longitude: coordinates.lng,
       category: selectedCategory,
       currency: selectedCurrency,
       images: selectedFiles.map((file) => URL.createObjectURL(file)),
     };
 
-    console.log(JSON.stringify(formData, null, 2));
-    resetForm();
-  }
-
-  const getCategoryData = async () => {
     try {
-      const response = await fetch("http://localhost:8000/api/list-categories");
-      if (!response.ok) {
-        throw new Error(`Error: ${response.status}`);
-      }
-
-      const data = await response.json();
-      return data;
+      await fetch("http://localhost:8000/api/real-estates/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Requested-With": "XMLHttpRequest",
+        },
+        withCredentials: true,
+        body: JSON.stringify(formData),
+        // body: JSON.stringify(formData, null, 2),
+      });
+      resetForm();
+      router.push("/");
+      console.log("estate posted");
     } catch (error) {
-      console.error("Error:", error.message);
-      return [];
+      console.log(error);
     }
-  };
+  }
 
   return (
     <Formik
@@ -152,7 +180,7 @@ export default function CreateForm() {
       onSubmit={handleFunction}
       validationSchema={validationSchema}
     >
-      <Form action="post">
+      <Form>
         <div className="flex flex-col justify-center items-center gap-5">
           <div className="w-[40em] max-md:w-[26em] max-sm:w-[18em]">
             <div className="sm:col-span-2">
@@ -167,7 +195,12 @@ export default function CreateForm() {
                 name="name"
                 id="name"
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
-                placeholder="Type product name"
+                placeholder="Type property name"
+              />
+              <ErrorMessage
+                name="name"
+                component="span"
+                className=" text-red-600"
               />
             </div>
             <div className="sm:col-span-2">
@@ -200,6 +233,11 @@ export default function CreateForm() {
                       })}
                       className="bg-gray-50 mb-3 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                       placeholder="Property location"
+                    />
+                    <ErrorMessage
+                      name="location"
+                      component="span"
+                      className=" text-red-600"
                     />
 
                     <div className="autocomplete-dropdown-container">
@@ -236,6 +274,40 @@ export default function CreateForm() {
                 )}
               </PlacesAutocomplete>
             </div>
+            {/* ArriveHour and LeaveHour */}
+            <div className="flex flex-col gap-5 my-10">
+              <div>
+                <label
+                  htmlFor="arriveHour"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Arrive Hour
+                </label>
+                <div>
+                  <TimePicker
+                    onChange={(newValue) => setArriveHour(newValue)}
+                    value={arriveHour}
+                    className="bg-gray-50 mb-3 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  />
+                </div>
+              </div>
+              <div className="sm:col-span-2">
+                <label
+                  htmlFor="leaveHour"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Leave Hour
+                </label>
+                <div>
+                  <TimePicker
+                    onChange={(newValue) => setLeaveHour(newValue)}
+                    value={leaveHour}
+                    className="bg-gray-50 mb-3 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  />
+                </div>
+              </div>
+            </div>
+
             <div className="sm:col-span-2">
               <label
                 htmlFor="price"
@@ -245,15 +317,20 @@ export default function CreateForm() {
               </label>
               <div className="flex items-center bg-gray-50 border border-gray-300 rounded-lg focus:bg-red-500">
                 <div className="relative w-full p-2">
-                  <span className="absolute top-2 left-2 px-2.5 py-[0.4em] font-bold text-gray-900 text-md dark:text-white">
+                  <span className="absolute top-2 left-2 px-2.5 py-[0.58em] font-bold text-gray-900 text-md dark:text-white">
                     {selectedCurrency}
                   </span>
                   <Field
-                    type="text"
+                    type="number"
                     name="price"
                     id="price"
-                    className="bg-gray-50 pl-8 outline-none text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full block p-[0.8em] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                    className="bg-gray-50 pl-14 outline-none text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 w-full block p-[0.8em] dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                     placeholder="0.00"
+                  />
+                  <ErrorMessage
+                    name="price"
+                    component="span"
+                    className=" text-red-600"
                   />
                 </div>
                 <div className="m-2 mr-[1em]">
@@ -266,9 +343,9 @@ export default function CreateForm() {
                     onChange={(e) => setSelectedCurrency(e.target.value)}
                   >
                     <option
-                      value="lv"
+                      value="BGN"
                       className={
-                        selectedCurrency === "lv"
+                        selectedCurrency === "BGN"
                           ? "bg-indigo-300"
                           : "bg-gray-200"
                       }
@@ -278,7 +355,7 @@ export default function CreateForm() {
                     <option
                       value="€"
                       className={
-                        selectedCurrency === "€"
+                        selectedCurrency === "EUR"
                           ? "bg-indigo-300"
                           : "bg-gray-200"
                       }
@@ -288,7 +365,7 @@ export default function CreateForm() {
                     <option
                       value="$"
                       className={
-                        selectedCurrency === "$"
+                        selectedCurrency === "USD"
                           ? "bg-indigo-300"
                           : "bg-gray-200"
                       }
@@ -335,6 +412,11 @@ export default function CreateForm() {
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="2"
               />
+              <ErrorMessage
+                name="rooms"
+                component="span"
+                className=" text-red-600"
+              />
             </div>
             <div className="sm:col-span-2">
               <label
@@ -350,6 +432,11 @@ export default function CreateForm() {
                 rows="8"
                 className="block p-2.5 w-full text-sm resize-none text-gray-900 bg-gray-50 rounded-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Your description here"
+              />
+              <ErrorMessage
+                name="description"
+                component="span"
+                className=" text-red-600"
               />
             </div>
           </div>
@@ -436,6 +523,11 @@ export default function CreateForm() {
               />
             </label>
           </div>
+          <ErrorMessage
+            name="images"
+            component="span"
+            className=" text-red-600"
+          />
           <button
             type="submit"
             className="w-full h-12 bg-blue-600 rounded-[10px] text-white text-lg font-bold mt-2"
