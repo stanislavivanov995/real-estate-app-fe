@@ -2,6 +2,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import {useEffect, useRef, useState} from "react";
+import api from "@/app/api/api";
 
 export default function AvatarMenu() {
     const [showMenu, setShowMenu] = useState(false);
@@ -29,6 +30,14 @@ export default function AvatarMenu() {
 
     const userInfo = {firstName: 'Mehmed', lastName: 'Syuleyman', avatar: ''};
 
+    const logout = e => {
+        api.post('logout')
+          .then(response => {
+            console.log(response);
+        });
+    }
+
+
     return (
         <div ref={dropdownRef}
              className={`relative ring-2 ${showMenu ? 'ring-blue-300' : 'ring-transparent'} 
@@ -55,7 +64,7 @@ export default function AvatarMenu() {
                         Dashboard</Link>
                     <Link className={'hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700'} href={'/profile'}>
                         Profile</Link>
-                    <Link className={'hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700'} href={'/logout'}>
+                    <Link className={'hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700'} href={'/'} onClick={logout}>
                         Sign out</Link>
                 </div>}
 

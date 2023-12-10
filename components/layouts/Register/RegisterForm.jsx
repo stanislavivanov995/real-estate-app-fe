@@ -6,31 +6,25 @@ import Link from "next/link";
 import * as Yup from "yup";
 
 const initialValues = {
-  firstName: "",
-  lastName: "",
+  name: "",
   email: "",
   password: "",
   confirmPassword: "",
-  toggle: false,
 };
 
 const validationSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .required("First Name is required!")
-    .min(2, "Minimum characters are 2!")
-    .max(15, "Maximum characters are 15!"),
-  lastName: Yup.string()
-    .required("Last Name is required!")
-    .min(2, "Minimum characters are 2!")
-    .max(15, "Maximum characters are 15!"),
+  name: Yup.string().required("First Name is required!"),
   email: Yup.string()
     .required("Email is required!")
     .email("Email must be valid"),
-  password: Yup.string().required("Password is required!"),
-  confirmPassword: Yup.string()
+    password: Yup.string()
+    .required("Password is required!")
+    .min(5, "Password must be at least 5 characters")
+    .max(50, "Password must not exceed 50 characters"),
+  password_confirmation: Yup.string()
     .required("Confirm Password is required!")
     .oneOf([Yup.ref("password")], "Passwords do not match!"),
-  toggle: Yup.boolean().oneOf([true], "Terms are required!"),
+  // toggle: Yup.boolean().oneOf([true], "Terms are required!"),
 });
 
 function handleFunction(data) {
@@ -39,29 +33,43 @@ function handleFunction(data) {
     formData[fieldName] = data[fieldName];
   });
 
-  console.log(formData);
   sendPostRequest(formData);
 }
 
 const sendPostRequest = async (data) => {
+  const { email, name, password } = data;
+
   try {
-    const response = await fetch("http://localhost:8000/api/register", {
-      method: "POST",
+    const response = await fetch('http://localhost:8000/api/register', {
+      method: 'POST',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data, null, 2),
+      body: JSON.stringify({
+        name,
+        email,
+        password,
+      }),
     });
 
-    if (response.ok) {
-      console.log("Registration successful!");
+    console.log(response.status);
+    if (response.status === 200) {
+      window.location.href = '/login';
     } else {
-      console.error("Registration failed!");
+      const responseData = await response.json(); // Parse response JSON
+
+      if (responseData.errors) {
+        console.log('Validation errors:', responseData.errors);
+      } else {
+        console.log('Registration failed. Status:', response.status);
+      }
     }
-  } catch (error) {
-    console.error("Error during registration:", error);
+
+  } catch (errors) {
+    console.log(errors);
   }
 };
+
 
 export default function RegisterForm() {
   return (
@@ -78,30 +86,13 @@ export default function RegisterForm() {
           <Field
             className="border-0 focus:border-0 focus:ring-0 bg-transparent"
             type="text"
-            name="firstName"
-            id="firstName"
-            placeholder="First Name"
+            name="name"
+            id="name"
+            placeholder="Name"
           />
         </div>
         <ErrorMessage
-          name="firstName"
-          component="span"
-          className=" text-red-600 text-[14px]"
-        />
-        <div className="flex gap-2 border-2 items-center h-10 bg-indigo-300  border-[#8098F980] p-2 rounded-lg w-[300px]">
-          <span>
-            <Image src="/person.png" alt="person" width={23} height={23} />
-          </span>
-          <Field
-            className="border-0 focus:border-0 focus:ring-0 bg-transparent"
-            type="text"
-            name="lastName"
-            id="lastName"
-            placeholder="Last Name"
-          />
-        </div>
-        <ErrorMessage
-          name="lastName"
+          name="name"
           component="span"
           className=" text-red-600 text-[14px]"
         />
@@ -156,13 +147,13 @@ export default function RegisterForm() {
           <Field
             className="border-0 focus:border-0 focus:ring-0 bg-transparent"
             type="password"
-            name="confirmPassword"
-            id="confirmPassword"
+            name="password_confirmation"
+            id="password_confirmation"
             placeholder="Confirm Password"
           />
         </div>
         <ErrorMessage
-          name="confirmPassword"
+          name="password_confirmation"
           component="span"
           className="text-red-600 text-[14px]"
         />

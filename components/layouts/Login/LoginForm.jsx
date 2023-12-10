@@ -3,6 +3,9 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import Image from "next/image.js";
 import * as Yup from "yup";
+import { useState } from 'react';
+import axios from "axios";
+import api from "@/app/api/api";
 
 const initialValues = {
   email: "",
@@ -10,23 +13,33 @@ const initialValues = {
   toggle: false,
 };
 
-const validationSchema = Yup.object().shape({
-  email: Yup.string()
-    .required("Email is required!")
-    .email("Email must be valid"),
-  password: Yup.string().required("Password is required!"),
-});
+// const validationSchema = Yup.object().shape({
+//   email: Yup.string()
+//     .required("Email is required!")
+//     .email("Email must be valid"),
+//   password: Yup.string().required("Password is required!"),
+// });
 
-function handleFunction(data) {
-  console.log(Object.values(data));
-}
+// function handleFunction(data) {
+//   console.log(Object.values(data));
+// }
+
+
 
 export default function LoginForm() {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+
+  const handleSubmit = e => {
+    api.post('login', { email, password })
+      .then(response => {
+    });
+  }
+
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={handleFunction}
-      validationSchema={validationSchema}
+      onSubmit={handleSubmit}
     >
       <Form className="mt-[25px] items-center flex flex-col w-[450px]">
         <div className="w-[350px] sm:w-[450px] mb-4 h-10 bg-indigo-300 rounded-[10px] flex justify-start text-md items-center pl-2.5 gap-3">
@@ -36,6 +49,8 @@ export default function LoginForm() {
             name="email"
             id="email"
             className="outline-0 focus:border-0 focus:ring-0 bg-transparent"
+            value={email}
+            onChange={e => setEmail(e.target.value)}
           />
         </div>
         <ErrorMessage
@@ -57,6 +72,8 @@ export default function LoginForm() {
               name="password"
               id="password"
               className="border-0 focus:border-0 focus:ring-0 bg-transparent"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
             />
           </div>
           <div className="mr-[15px] opacity-30">
