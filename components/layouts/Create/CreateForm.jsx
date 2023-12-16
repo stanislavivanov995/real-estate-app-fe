@@ -160,7 +160,7 @@ export default function CreateForm({ categoryData }) {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "X-Requested-With": "XMLHttpRequest",
+          // "X-Requested-With": "XMLHttpRequest",
         },
         withCredentials: true,
         body: JSON.stringify(formData),
