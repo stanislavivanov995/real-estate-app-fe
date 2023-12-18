@@ -1,8 +1,8 @@
 'use client';
 import PublicLayout from "@/components/layouts/PublicLayout";
-import {useSearchParams} from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import TopRatedPropertyCard from "@/app/public/home/TopRatedPropertyCard";
-import {useState} from "react";
+import { useState } from "react";
 import DealCard from "@/app/public/search/[results]/DealCard";
 
 export default function ResultsPage() {
@@ -45,11 +45,11 @@ export default function ResultsPage() {
     const checkOut = searchParams.get('checkOut')
     const category = searchParams.get('category')
 
-    console.log(lat)
-    console.log(lng)
-    console.log(checkIn)
-    console.log(checkOut)
-    console.log(category)
+    // console.log(lat)
+    // console.log(lng)
+    // console.log(checkIn)
+    // console.log(checkOut)
+    // console.log(category)
 
     return (
         <PublicLayout>
@@ -62,12 +62,12 @@ export default function ResultsPage() {
 
                     {results.map(p =>
                         <DealCard key={p.id}
-                                  name={p.name}
-                                  imgUrl={p.imgUrl}
-                                  city={p.city}
-                                  property={p.property}
-                                  rating={p.rating}
-                                  reviews={p.reviews}/>
+                            name={p.name}
+                            imgUrl={p.imgUrl}
+                            city={p.city}
+                            property={p.property}
+                            rating={p.rating}
+                            reviews={p.reviews} />
                     )}
 
                 </section>
